@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Alan Wheeling Pneus e Rodas</title>
+    <meta
+      name="description"
+      content="Reforma de rodas, pintura eletrostática, diamantação CNC, desempeno e kits de rodas e pneus em Aracaju."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;1,800;1,900&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="mark" id="m-nome"></div>
+        <a class="btn" data-wa="Olá! Vi o site e queria um orçamento." href="#contato"
+          >Chamar no WhatsApp</a
+        >
+      </header>
+
+      <div class="hero">
+        <div>
+          <h1>Sua roda volta da loja como nova.</h1>
+          <p class="lead">
+            Reforma, pintura eletrostática, diamantação CNC, desempeno e kits de rodas e pneus para
+            carro e moto, em Aracaju. Mande uma foto da roda pelo WhatsApp e receba o orçamento.
+          </p>
+          <div class="cta">
+            <a
+              class="btn"
+              data-wa="Olá! Tenho uma roda para reformar. Posso mandar uma foto?"
+              href="#contato"
+              >Mandar foto da roda</a
+            >
+            <a class="btn ghost" href="#trabalhos">Ver trabalhos</a>
+          </div>
+          <div class="proof">
+            <div><b>36,3 mil</b><span>seguidores no Instagram</span></div>
+            <div><b>836</b><span>publicações de trabalhos</span></div>
+          </div>
+        </div>
+        <div class="wheelbox">
+          <img
+            id="hero-roda"
+            alt="Roda preta com face diamantada, vista em três quartos"
+            src="assets/img/roda-hero.webp"
+            width="1000"
+            height="1035"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker" aria-hidden="true"><div id="tk"></div></div>
+
+    <div class="wrap">
+      <section id="trabalhos">
+        <div class="ig-head">
+          <div class="head">
+            <h2>Carros que saíram da loja</h2>
+            <p>Projetos publicados no Instagram da loja. Toque numa foto para ampliar.</p>
+          </div>
+          <a
+            class="btn ghost"
+            href="https://www.instagram.com/alanpneuserodas/"
+            target="_blank"
+            rel="noopener"
+            >Ver perfil no Instagram</a
+          >
+        </div>
+        <div class="grid" id="grid"></div>
+        <div class="more">
+          <button type="button" class="btn ghost" id="b-more">Mostrar mais trabalhos</button>
+        </div>
+      </section>
+
+      <section id="processo">
+        <div class="head">
+          <h2>O processo, de perto</h2>
+          <p>
+            Trechos dos vídeos da loja. A roda é preparada, pintada e usinada ali mesmo, com os
+            mesmos processos usados na fábrica.
+          </p>
+        </div>
+        <div class="reels" id="reels"></div>
+        <div class="strip" id="strip"></div>
+      </section>
+
+      <section id="servicos">
+        <div class="head">
+          <h2>Serviços da loja</h2>
+          <p>Da roda riscada ao kit completo, tudo é feito na própria loja.</p>
+        </div>
+        <div class="svc">
+          <article>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <circle cx="24" cy="24" r="16" />
+              <path d="M24 8l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z" />
+            </svg>
+            <h3>Diamantação CNC</h3>
+            <p>
+              A face da roda é usinada no torno CNC e fica com o brilho espelhado de roda nova de
+              fábrica.
+            </p>
+          </article>
+          <article>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M10 12h24v10H10zM34 17h5v10H24v6" />
+              <rect x="21" y="33" width="6" height="8" rx="1" />
+            </svg>
+            <h3>Pintura eletrostática</h3>
+            <p>
+              Pintura a pó, curada no forno, em preto, grafite, black piano ou na cor que o projeto
+              pedir.
+            </p>
+          </article>
+          <article>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <circle cx="24" cy="24" r="15" />
+              <circle cx="24" cy="24" r="4" />
+              <path d="M24 9v11M24 28v11M9 24h11M28 24h11" />
+            </svg>
+            <h3>Desempeno</h3>
+            <p>
+              Bateu em buraco e o volante vibra? A roda é medida e endireitada para girar sem
+              balanço.
+            </p>
+          </article>
+          <article>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M8 34l14-14M20 22l6 6M26 16l6 6-4 4-6-6zM30 12l6 6" />
+              <path d="M6 40h14" />
+            </svg>
+            <h3>Solda de alumínio</h3>
+            <p>
+              Trincas e lascas na borda são fechadas com solda e acabadas até a roda voltar ao
+              perfil original.
+            </p>
+          </article>
+          <article>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <circle cx="24" cy="24" r="16" />
+              <circle cx="24" cy="15" r="2.5" />
+              <circle cx="32.6" cy="21.2" r="2.5" />
+              <circle cx="29.3" cy="31.3" r="2.5" />
+              <circle cx="18.7" cy="31.3" r="2.5" />
+              <circle cx="15.4" cy="21.2" r="2.5" />
+            </svg>
+            <h3>Furação de rodas</h3>
+            <p>
+              Máquina própria para mudar a furação e fazer a roda que você quer servir no seu carro.
+            </p>
+          </article>
+          <article>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M8 18h26l-6-6M40 30H14l6 6" />
+            </svg>
+            <h3>Kits e troca</h3>
+            <p>
+              Rodas e pneus novos, compra e troca de usadas, com montagem, balanceamento e
+              alinhamento 3D.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="desempeno">
+        <div class="fix">
+          <div class="head" style="margin: 0">
+            <h2>Veja o que o desempeno corrige</h2>
+            <p>
+              Uma roda empenada gira fora do círculo. É isso que o cliente sente como vibração no
+              volante. Aperte os botões para comparar a roda antes e depois do serviço.
+            </p>
+          </div>
+          <div class="fixbox">
+            <svg
+              viewBox="0 0 320 320"
+              role="img"
+              aria-label="Aro de roda girando, primeiro empenado e depois reto"
+            >
+              <circle
+                cx="160"
+                cy="160"
+                r="118"
+                fill="none"
+                stroke="#3a3926"
+                stroke-width="2"
+                stroke-dasharray="4 6"
+              />
+              <path
+                id="rim"
+                fill="none"
+                stroke="#f5b800"
+                stroke-width="9"
+                stroke-linejoin="round"
+              />
+              <g id="hub" stroke="#aaa794" stroke-width="3" fill="none">
+                <circle cx="160" cy="160" r="16" />
+                <path d="M160 144V90M160 176v54M144 160H90M176 160h54" />
+              </g>
+            </svg>
+            <div class="seg" role="group" aria-label="Estado da roda">
+              <button type="button" id="b-antes" aria-pressed="true">Antes</button
+              ><button type="button" id="b-depois" aria-pressed="false">Depois</button>
+            </div>
+            <div class="read" id="fixread"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="simulador">
+        <div class="head">
+          <h2>Veja a roda no seu carro antes de comprar</h2>
+          <p>
+            Escolha o estilo e o aro. O simulador mostra a roda no carro e a medida de pneu
+            indicada, e você manda o pedido pronto para a loja.
+          </p>
+        </div>
+        <div class="sim">
+          <canvas
+            id="cv"
+            width="2000"
+            height="897"
+            role="img"
+            aria-label="Volvo S60 com a roda escolhida"
+          ></canvas>
+          <div class="spec">
+            <span>Volvo S60 (exemplo)</span><span id="s1"></span><span id="s2"></span>
+          </div>
+          <div class="ctl">
+            <div>
+              <span class="t">Roda</span>
+              <div class="chips" id="estilos"></div>
+            </div>
+            <div>
+              <span class="t">Aro</span>
+              <div class="chips" id="aros"></div>
+            </div>
+            <a class="btn" id="wa-sim" data-wa="" href="#contato">Pedir orçamento desta roda</a>
+          </div>
+        </div>
+        <p class="note">
+          Medida sugerida pelo simulador. A loja confirma a compatibilidade exata com o seu carro no
+          atendimento.
+        </p>
+      </section>
+
+      <section id="historia">
+        <div class="story">
+          <div class="pics">
+            <img
+              id="img-story"
+              alt="Publicação da loja com a foto da primeira oficina"
+              width="760"
+              height="951"
+              src="assets/img/historia-loja.webp"
+            /><img
+              id="img-facade"
+              alt="Fachada atual da loja em Aracaju"
+              width="620"
+              height="775"
+              src="assets/img/fachada.webp"
+            />
+          </div>
+          <div class="head" style="margin: 0">
+            <h2>Da garagem à referência em Aracaju</h2>
+            <p>
+              A Alan Wheeling começou pequena, com uma máquina de montar pneus e poucas rodas
+              usadas. Hoje tem fachada própria, parede de rodas e equipamento para pintura,
+              diamantação e furação.
+            </p>
+            <blockquote>
+              De um carro velho e poucas rodas usadas no porta-malas à referência em Aracaju.
+              <footer>Publicação fixada no Instagram da loja</footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section id="como">
+        <div class="head">
+          <h2>Do orçamento à roda pronta</h2>
+          <p>Como funciona o atendimento, do primeiro contato à retirada.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Mande a foto</h3>
+            <p>Fotografe a roda e envie pelo WhatsApp, com o modelo do carro.</p>
+          </li>
+          <li>
+            <h3>Receba o orçamento</h3>
+            <p>A loja avalia o dano e informa o serviço necessário, o valor e o prazo.</p>
+          </li>
+          <li>
+            <h3>Leve a roda</h3>
+            <p>Traga a roda ou o carro até a loja para o serviço.</p>
+          </li>
+          <li>
+            <h3>Retire pronta</h3>
+            <p>Confira o resultado e leve a roda de volta ao carro.</p>
+          </li>
+        </ol>
+      </section>
+
+      <div class="igband">
+        <h2>Mais de 800 trabalhos no Instagram</h2>
+        <a
+          class="btn"
+          href="https://www.instagram.com/alanpneuserodas/"
+          target="_blank"
+          rel="noopener"
+          >Seguir @alanpneuserodas</a
+        >
+      </div>
+
+      <section id="contato" class="contact">
+        <div class="head" style="margin: 0">
+          <h2>Fale com a loja</h2>
+          <p>A resposta mais rápida vem pelo WhatsApp. Mande a foto da roda e o modelo do carro.</p>
+          <div class="cbtns">
+            <a
+              class="btn"
+              id="wa-c"
+              data-wa="Olá! Vim pelo site e queria um orçamento."
+              href="#contato"
+              >Chamar no WhatsApp</a
+            ><a class="btn ghost" id="mapa" target="_blank" rel="noopener" href="#contato"
+              >Abrir no mapa</a
+            >
+          </div>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Endereço</dt>
+            <dd id="c-end"></dd>
+          </div>
+          <div>
+            <dt>WhatsApp</dt>
+            <dd id="c-wa"></dd>
+          </div>
+          <div>
+            <dt>Horário</dt>
+            <dd id="c-hor"></dd>
+          </div>
+          <div>
+            <dt>Instagram</dt>
+            <dd>
+              <a href="https://www.instagram.com/alanpneuserodas/" target="_blank" rel="noopener"
+                >@alanpneuserodas</a
+              >
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+    <div class="wrap">
+      <footer>
+        Proposta de site para a Alan Wheeling Pneus &amp; Rodas. Fotos e vídeos do Instagram
+        @alanpneuserodas. Horário e telefone devem ser confirmados com a loja antes de publicar.
+      </footer>
+    </div>
+
+    <script src="js/dados.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,800 @@
+/* Layout: preto de oficina e amarelo da fachada. Hero com a roda renderizada, depois prova real: trabalhos do Instagram em grade, vídeos do processo e a história da loja. */
+:root {
+  --ink: #0e0e0b;
+  --panel: #17170f;
+  --line: #2e2d21;
+  --paper: #f4f1e3;
+  --mute: #aaa794;
+  --amber: #f5b800;
+  --amberink: #171300;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  padding-inline: 16px;
+  padding-block: 0;
+  overflow-x: hidden;
+}
+.wrap {
+  max-width: 1160px;
+  margin-inline: auto;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(2.8rem, 8.4vw, 6rem);
+}
+h2 {
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+}
+h3 {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+p {
+  margin: 0;
+}
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 1.05rem var(--body);
+  background: var(--amber);
+  color: var(--amberink);
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 26px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    background 0.15s;
+}
+.btn:hover {
+  background: #ffcb2e;
+  transform: translateY(-2px);
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--paper);
+  border: 1.5px solid var(--line);
+}
+.btn.ghost:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-block: 18px;
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: linear-gradient(var(--ink) 70%, transparent);
+}
+.mark {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.mark span {
+  color: var(--amber);
+}
+header .btn {
+  padding: 10px 20px;
+  font-size: 0.98rem;
+}
+
+/* hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 32px;
+  align-items: center;
+  padding-block: 24px 64px;
+}
+.hero p.lead {
+  font-size: 1.2rem;
+  color: var(--mute);
+  max-width: 46ch;
+  margin-block: 22px 30px;
+}
+.hero .cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wheelbox {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  justify-self: center;
+  min-width: 0;
+  isolation: isolate;
+}
+.wheelbox::before {
+  content: "";
+  position: absolute;
+  inset: 8% 4% 14% 10%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(245, 184, 0, 0.22),
+    rgba(245, 184, 0, 0.07) 55%,
+    transparent 75%
+  );
+  filter: blur(8px);
+}
+.wheelbox img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  will-change: transform;
+  animation: rollin 1.3s cubic-bezier(0.16, 0.84, 0.3, 1) both;
+}
+@keyframes rollin {
+  from {
+    opacity: 0;
+    transform: translateX(9%) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ticker */
+.ticker {
+  background: var(--amber);
+  color: var(--amberink);
+  margin-inline: -16px;
+  overflow: hidden;
+  white-space: nowrap;
+  transform: rotate(-1.2deg);
+  border-block: 3px solid #050504;
+}
+.ticker div {
+  display: inline-flex;
+  gap: 0;
+  animation: tick 28s linear infinite;
+  padding-block: 10px;
+}
+.ticker span {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  padding-inline: 22px;
+}
+.ticker span::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--amberink);
+  margin-left: 44px;
+  vertical-align: middle;
+}
+@keyframes tick {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+section {
+  padding-block: 84px 0;
+}
+.head {
+  display: grid;
+  gap: 14px;
+  max-width: 62ch;
+  margin-bottom: 36px;
+}
+.head p {
+  color: var(--mute);
+}
+
+/* services */
+.svc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 2px;
+  background: var(--line);
+  border: 2px solid var(--line);
+}
+.svc article {
+  background: var(--panel);
+  padding: 26px 24px 30px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  min-width: 0;
+  transition: background 0.2s;
+}
+.svc article:hover {
+  background: #1f1e12;
+}
+.svc h3 {
+  color: var(--amber);
+}
+.svc p {
+  color: var(--mute);
+}
+.svc svg {
+  width: 44px;
+  height: 44px;
+  stroke: var(--amber);
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* desempeno */
+.fix {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 36px;
+  align-items: center;
+}
+.fixbox {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  min-width: 0;
+}
+.fixbox svg {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+.seg {
+  display: flex;
+  gap: 8px;
+}
+.seg button {
+  font: 600 0.98rem var(--body);
+  color: var(--paper);
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 20px;
+  cursor: pointer;
+}
+.seg button[aria-pressed="true"] {
+  background: var(--amber);
+  color: var(--amberink);
+  border-color: var(--amber);
+}
+.fixbox .read {
+  font-variant-numeric: tabular-nums;
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+.fixbox .read b {
+  color: var(--paper);
+}
+
+/* simulator */
+.sim {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  overflow: hidden;
+}
+.sim canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #bcc9d3;
+}
+.sim .spec {
+  display: flex;
+  gap: 6px 26px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  border-top: 2px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.sim .spec b {
+  color: var(--amber);
+}
+.ctl {
+  display: flex;
+  gap: 22px 40px;
+  flex-wrap: wrap;
+  padding: 18px 20px 22px;
+  border-top: 2px solid var(--line);
+  align-items: flex-end;
+}
+.ctl .t {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--mute);
+  margin-bottom: 8px;
+}
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.chip {
+  font: 500 0.95rem var(--body);
+  color: var(--paper);
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+.chip[aria-pressed="true"] {
+  background: var(--amber);
+  color: var(--amberink);
+  border-color: var(--amber);
+}
+.chip:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.note {
+  font-size: 0.88rem;
+  color: var(--mute);
+  margin-top: 12px;
+}
+
+/* steps */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: s;
+}
+.steps li {
+  border-top: 4px solid var(--amber);
+  padding-top: 16px;
+  display: grid;
+  gap: 8px;
+  counter-increment: s;
+  min-width: 0;
+}
+.steps li::before {
+  content: counter(s);
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--amber);
+}
+.steps h3 {
+  font-size: 1.5rem;
+}
+.steps p {
+  color: var(--mute);
+}
+
+/* contact */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: start;
+  padding-bottom: 84px;
+}
+.facts {
+  display: grid;
+  gap: 20px;
+}
+.facts dt {
+  font-size: 0.88rem;
+  color: var(--mute);
+}
+.facts dd {
+  margin: 2px 0 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.cbtns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+footer {
+  border-top: 2px solid var(--line);
+  padding-block: 22px 34px;
+  font-size: 0.88rem;
+  color: var(--mute);
+  max-width: 75ch;
+}
+
+/* numeros do perfil */
+.proof {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+.proof div {
+  display: grid;
+  gap: 2px;
+}
+.proof b {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--amber);
+  font-variant-numeric: tabular-nums;
+}
+.proof span {
+  font-size: 0.9rem;
+  color: var(--mute);
+}
+
+/* galeria estilo perfil do instagram */
+.ig-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.ig-head .head {
+  margin: 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+.grid button {
+  all: unset;
+  position: relative;
+  display: block;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--panel);
+  min-width: 0;
+}
+.grid button[hidden] {
+  display: none;
+}
+.grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.grid button:hover img {
+  transform: scale(1.05);
+}
+.grid .cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 28px 12px 10px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  display: grid;
+  gap: 1px;
+}
+.grid .cap b {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.grid .cap span {
+  font-size: 0.82rem;
+  color: #d9d6c6;
+  line-height: 1.3;
+}
+.grid button:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: -3px;
+}
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+dialog.lb {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: min(92vw, 560px);
+  width: 100%;
+  color: var(--paper);
+}
+dialog.lb::backdrop {
+  background: rgba(5, 5, 4, 0.88);
+}
+.lb figure {
+  margin: 0;
+  background: var(--panel);
+  border: 2px solid var(--line);
+}
+.lb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 72vh;
+  object-fit: contain;
+  background: #000;
+}
+.lb figcaption {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px 16px;
+}
+.lb figcaption b {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.lb figcaption span {
+  color: var(--mute);
+}
+.lb .lbbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.lb .lbbar .btn {
+  padding: 9px 16px;
+  font-size: 0.92rem;
+}
+
+/* videos do processo */
+.reels {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.reel {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  align-content: start;
+}
+.reel .frame {
+  position: relative;
+  aspect-ratio: 9/16;
+  overflow: hidden;
+  background: #000;
+  border: 2px solid var(--line);
+}
+.reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.reel .play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--paper);
+}
+.reel .play svg {
+  width: 58px;
+  height: 58px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+}
+.reel .play[hidden] {
+  display: none;
+}
+.reel h3 {
+  font-size: 1.35rem;
+}
+.reel p {
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+.strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin-top: 22px;
+}
+.strip a {
+  position: relative;
+  display: block;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+.strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s;
+}
+.strip a:hover img {
+  transform: scale(1.06);
+}
+.strip span {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 20px 8px 7px;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+}
+
+/* historia */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.story .pics {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 10px;
+  align-items: end;
+  min-width: 0;
+}
+.story .pics img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 2px solid var(--line);
+}
+.story .pics img:first-child {
+  transform: rotate(-2deg);
+}
+.story blockquote {
+  margin: 22px 0 0;
+  padding-left: 18px;
+  border-left: 4px solid var(--amber);
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  max-width: 28ch;
+}
+.story blockquote footer {
+  border: 0;
+  padding: 8px 0 0;
+  font: 500 0.9rem var(--body);
+  text-transform: none;
+  color: var(--mute);
+}
+
+/* faixa instagram */
+.igband {
+  margin-top: 84px;
+  background: var(--amber);
+  color: var(--amberink);
+  padding: 34px clamp(18px, 4vw, 44px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.igband h2 {
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  max-width: 20ch;
+}
+.igband .btn {
+  background: var(--amberink);
+  color: var(--amber);
+}
+.igband .btn:hover {
+  background: #000;
+}
+
+@media (max-width: 860px) {
+  .reels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .reel h3 {
+    font-size: 1.15rem;
+    overflow-wrap: anywhere;
+  }
+  .story {
+    grid-template-columns: 1fr;
+  }
+  .strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid .cap span {
+    display: none;
+  }
+}
+@media (max-width: 860px) {
+  .hero,
+  .fix,
+  .contact {
+    grid-template-columns: 1fr;
+  }
+  .wheelbox {
+    max-width: 460px;
+  }
+  section {
+    padding-top: 64px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wheelbox img,
+  .ticker div {
+    animation: none;
+  }
+  .grid img,
+  .strip img {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .btn {
+    transition: none;
+  }
+}
