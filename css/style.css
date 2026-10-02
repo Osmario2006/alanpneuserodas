@@ -557,6 +557,7 @@ footer {
   margin: 0;
 }
 .grid {
+  cursor: grab;
   display: flex;
   gap: 8px;
   overflow-x: auto;
@@ -564,6 +565,14 @@ footer {
 }
 .grid::-webkit-scrollbar {
   display: none;
+}
+.grid.arrastando {
+  cursor: grabbing;
+  user-select: none;
+}
+.grid img {
+  -webkit-user-drag: none;
+  user-select: none;
 }
 .grid button {
   all: unset;

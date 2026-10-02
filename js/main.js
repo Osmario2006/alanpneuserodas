@@ -104,17 +104,95 @@ lb.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") showLb(cur - 1);
 });
 
-/* rolagem automática da galeria: para quando o usuário interage e volta após 1,5 s */
-if (!reduce) {
+/* rolagem da galeria: arrasto com o mouse, dedo/trackpad e deslize automático.
+   Para quando o usuário interage e volta 0,5 s depois. A lista está duplicada,
+   então a posição é mantida na faixa central para dar a volta nos dois sentidos. */
+{
   const VEL = 45; // px por segundo
+  const ESPERA = 500; // ms depois da última interação
   let pos = 0,
     ult = 0,
     t0 = performance.now(),
     ate = 0,
     parado = false,
+    arrastando = false,
+    moveu = false,
     visivel = true;
-  const segurar = () => (ate = performance.now() + 1500);
+  const segurar = () => (ate = performance.now() + ESPERA);
   const meio = () => grid.children[TRABALHOS.length].offsetLeft - grid.children[0].offsetLeft;
+  const norm = (v) => {
+    const m = meio();
+    if (m <= 0) return v;
+    if (v < m * 0.5) return v + m;
+    if (v >= m * 1.5) return v - m;
+    return v;
+  };
+  const ir = (v) => {
+    grid.scrollLeft = v;
+    ult = grid.scrollLeft;
+    pos = v;
+  };
+  /* posição inicial na faixa central (feita quando o layout já tem largura) */
+  let pronto = false;
+  const iniciar = () => {
+    if (pronto || meio() <= 0) return;
+    pronto = true;
+    ir(norm(grid.scrollLeft));
+  };
+  iniciar();
+
+  /* mouse: arrastar para qualquer lado */
+  let x0 = 0,
+    s0 = 0,
+    id = null;
+  grid.addEventListener("pointerdown", (e) => {
+    iniciar();
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    id = e.pointerId;
+    x0 = e.clientX;
+    s0 = grid.scrollLeft;
+    moveu = false;
+  });
+  grid.addEventListener("pointermove", (e) => {
+    if (e.pointerId !== id) return;
+    const dx = e.clientX - x0;
+    if (!arrastando) {
+      if (Math.abs(dx) < 6) return;
+      arrastando = moveu = true;
+      grid.setPointerCapture(id);
+      grid.classList.add("arrastando");
+    }
+    let v = s0 - dx;
+    const m = meio();
+    while (v < m * 0.5) (v += m), (s0 += m);
+    while (v >= m * 1.5) (v -= m), (s0 -= m);
+    ir(v);
+  });
+  const soltar = (e) => {
+    if (e.pointerId !== id) return;
+    id = null;
+    if (arrastando) {
+      arrastando = false;
+      grid.classList.remove("arrastando");
+      segurar();
+    }
+  };
+  grid.addEventListener("pointerup", soltar);
+  grid.addEventListener("pointercancel", soltar);
+  grid.addEventListener(
+    "click",
+    (e) => {
+      if (moveu) {
+        e.stopPropagation();
+        e.preventDefault();
+        moveu = false;
+      }
+    },
+    true,
+  );
+  grid.addEventListener("dragstart", (e) => e.preventDefault());
+
+  /* pausas */
   grid.addEventListener("pointerenter", (e) => {
     if (e.pointerType === "mouse") parado = true;
   });
@@ -133,31 +211,27 @@ if (!reduce) {
   );
   grid.addEventListener("wheel", segurar, { passive: true });
   grid.addEventListener("focusin", segurar);
+
   /* rolagem feita pelo usuário (dedo, trackpad, teclado): acompanha e segura */
   const sincronizar = () => {
-    if (Math.abs(grid.scrollLeft - ult) <= 1.5) return false;
+    if (arrastando || Math.abs(grid.scrollLeft - ult) <= 1.5) return;
     segurar();
-    const m = meio();
-    if (grid.scrollLeft >= m) grid.scrollLeft -= m;
-    pos = ult = grid.scrollLeft;
-    return true;
+    ir(norm(grid.scrollLeft));
   };
   grid.addEventListener("scroll", sincronizar);
-  new IntersectionObserver(([e]) => (visivel = e.isIntersecting)).observe(grid);
-  const passo = (t) => {
-    const dt = Math.min((t - t0) / 1000, 0.1);
-    t0 = t;
-    sincronizar();
-    if (visivel && !parado && !lb.open && t >= ate) {
-      pos += VEL * dt;
-      const m = meio();
-      if (m > 0 && pos >= m) pos -= m;
-      grid.scrollLeft = pos;
-      ult = grid.scrollLeft;
-    }
+
+  if (!reduce) {
+    new IntersectionObserver(([e]) => (visivel = e.isIntersecting)).observe(grid);
+    const passo = (t) => {
+      const dt = Math.min((t - t0) / 1000, 0.1);
+      t0 = t;
+      iniciar();
+      sincronizar();
+      if (visivel && !parado && !arrastando && !lb.open && t >= ate) ir(norm(pos + VEL * dt));
+      requestAnimationFrame(passo);
+    };
     requestAnimationFrame(passo);
-  };
-  requestAnimationFrame(passo);
+  }
 }
 
 PROCESSO.forEach((p) => {
