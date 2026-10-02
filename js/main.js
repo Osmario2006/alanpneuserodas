@@ -56,21 +56,22 @@ document.addEventListener("keydown", (e) => {
 });
 
 /* galeria de trabalhos */
-const grid = $("#grid"),
-  SHOW = 12;
-TRABALHOS.forEach((g, i) => {
-  const b = document.createElement("button");
-  b.type = "button";
-  b.hidden = i >= SHOW;
-  b.setAttribute("aria-label", `${g.titulo}: ${g.detalhe}. Ampliar`);
-  b.innerHTML = `<img alt="" loading="lazy" src="${g.img}"><span class="cap"><b>${g.titulo}</b><span>${g.detalhe}</span></span>`;
-  b.onclick = () => openLb(i);
-  grid.appendChild(b);
-});
-$("#b-more").onclick = (e) => {
-  grid.querySelectorAll("button[hidden]").forEach((b) => (b.hidden = false));
-  e.currentTarget.parentElement.remove();
-};
+const grid = $("#grid");
+/* a lista é repetida para a rolagem automática poder dar a volta sem corte */
+[false, true].forEach((copia) =>
+  TRABALHOS.forEach((g, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", `${g.titulo}: ${g.detalhe}. Ampliar`);
+    if (copia) {
+      b.setAttribute("aria-hidden", "true");
+      b.tabIndex = -1;
+    }
+    b.innerHTML = `<img alt="" loading="lazy" src="${g.img}"><span class="cap"><b>${g.titulo}</b><span>${g.detalhe}</span></span>`;
+    b.onclick = () => openLb(i);
+    grid.appendChild(b);
+  }),
+);
 const lb = document.createElement("dialog");
 lb.className = "lb";
 lb.setAttribute("aria-label", "Trabalho ampliado");
@@ -103,36 +104,62 @@ lb.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") showLb(cur - 1);
 });
 
-/* videos do processo: tocam sem som quando aparecem na tela */
-const io = new IntersectionObserver(
-  (es) =>
-    es.forEach((e) => {
-      const v = e.target;
-      if (reduce) return;
-      if (e.isIntersecting) {
-        v.play().catch(() => {});
-      } else v.pause();
-    }),
-  { threshold: 0.35 },
-);
-VIDEOS.forEach(({ arquivo: k, titulo: t, texto: d }) => {
-  const el = document.createElement("div");
-  el.className = "reel";
-  el.innerHTML = `<div class="frame"><video muted loop playsinline preload="none" poster="assets/video/${k}-capa.jpg" aria-label="${t}"></video>
- <button type="button" class="play" aria-label="Tocar vídeo: ${t}"${reduce ? "" : " hidden"}><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,.45)" stroke="#f5b800" stroke-width="3"/><path d="M26 20l20 12-20 12z" fill="#f5b800"/></svg></button></div><h3>${t}</h3><p>${d}</p>`;
-  $("#reels").appendChild(el);
-  const v = el.querySelector("video");
-  v.src = `assets/video/${k}.mp4`;
-  const pb = el.querySelector(".play");
-  pb.onclick = () => {
-    v.play();
-    pb.hidden = true;
-  };
-  v.addEventListener("pause", () => {
-    if (reduce) pb.hidden = false;
+/* rolagem automática da galeria: para quando o usuário interage e volta após 1,5 s */
+if (!reduce) {
+  const VEL = 45; // px por segundo
+  let pos = 0,
+    ult = 0,
+    t0 = performance.now(),
+    ate = 0,
+    parado = false,
+    visivel = true;
+  const segurar = () => (ate = performance.now() + 1500);
+  const meio = () => grid.children[TRABALHOS.length].offsetLeft - grid.children[0].offsetLeft;
+  grid.addEventListener("pointerenter", (e) => {
+    if (e.pointerType === "mouse") parado = true;
   });
-  io.observe(v);
-});
+  grid.addEventListener("pointerleave", (e) => {
+    if (e.pointerType === "mouse") {
+      parado = false;
+      segurar();
+    }
+  });
+  grid.addEventListener("touchstart", () => (parado = true), { passive: true });
+  ["touchend", "touchcancel"].forEach((ev) =>
+    grid.addEventListener(ev, () => {
+      parado = false;
+      segurar();
+    }),
+  );
+  grid.addEventListener("wheel", segurar, { passive: true });
+  grid.addEventListener("focusin", segurar);
+  /* rolagem feita pelo usuário (dedo, trackpad, teclado): acompanha e segura */
+  const sincronizar = () => {
+    if (Math.abs(grid.scrollLeft - ult) <= 1.5) return false;
+    segurar();
+    const m = meio();
+    if (grid.scrollLeft >= m) grid.scrollLeft -= m;
+    pos = ult = grid.scrollLeft;
+    return true;
+  };
+  grid.addEventListener("scroll", sincronizar);
+  new IntersectionObserver(([e]) => (visivel = e.isIntersecting)).observe(grid);
+  const passo = (t) => {
+    const dt = Math.min((t - t0) / 1000, 0.1);
+    t0 = t;
+    sincronizar();
+    if (visivel && !parado && !lb.open && t >= ate) {
+      pos += VEL * dt;
+      const m = meio();
+      if (m > 0 && pos >= m) pos -= m;
+      grid.scrollLeft = pos;
+      ult = grid.scrollLeft;
+    }
+    requestAnimationFrame(passo);
+  };
+  requestAnimationFrame(passo);
+}
+
 PROCESSO.forEach((p) => {
   const a = document.createElement("a");
   a.href = p.instagram;

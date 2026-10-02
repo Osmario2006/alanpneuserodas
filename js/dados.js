@@ -158,15 +158,3 @@ const PROCESSO = [
     instagram: "https://www.instagram.com/p/DbJrxqyRvMV/",
   },
 ];
-
-/* Vídeos da seção "O processo, de perto" (arquivo = nome em assets/video, sem .mp4) */
-const VIDEOS = [
-  { arquivo: "diamantacao", titulo: "Diamantação CNC", texto: "A face da roda passando no torno." },
-  { arquivo: "desempeno", titulo: "Desempeno", texto: "A roda empenada sendo endireitada." },
-  {
-    arquivo: "transformacao",
-    titulo: "Transformação",
-    texto: "Do carro que chegou ao carro que saiu.",
-  },
-  { arquivo: "blackpiano", titulo: "Black piano", texto: "Pintura eletrostática preta brilhante." },
-];

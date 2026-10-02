@@ -556,22 +556,23 @@ footer {
   margin: 0;
 }
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.grid::-webkit-scrollbar {
+  display: none;
 }
 .grid button {
   all: unset;
   position: relative;
   display: block;
+  flex: 0 0 min(300px, 72vw);
   aspect-ratio: 4/5;
   overflow: hidden;
   cursor: pointer;
   background: var(--panel);
-  min-width: 0;
-}
-.grid button[hidden] {
-  display: none;
 }
 .grid img {
   width: 100%;
@@ -607,11 +608,6 @@ footer {
 .grid button:focus-visible {
   outline: 3px solid var(--amber);
   outline-offset: -3px;
-}
-.more {
-  display: flex;
-  justify-content: center;
-  margin-top: 22px;
 }
 dialog.lb {
   border: 0;
@@ -664,56 +660,6 @@ dialog.lb::backdrop {
   font-size: 0.92rem;
 }
 
-/* videos do processo */
-.reels {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-}
-.reel {
-  display: grid;
-  gap: 10px;
-  min-width: 0;
-  align-content: start;
-}
-.reel .frame {
-  position: relative;
-  aspect-ratio: 9/16;
-  overflow: hidden;
-  background: #000;
-  border: 2px solid var(--line);
-}
-.reel video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.reel .play {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  color: var(--paper);
-}
-.reel .play svg {
-  width: 58px;
-  height: 58px;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
-}
-.reel .play[hidden] {
-  display: none;
-}
-.reel h3 {
-  font-size: 1.35rem;
-}
-.reel p {
-  color: var(--mute);
-  font-size: 0.95rem;
-}
 .strip {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -813,13 +759,6 @@ dialog.lb::backdrop {
 }
 
 @media (max-width: 860px) {
-  .reels {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .reel h3 {
-    font-size: 1.15rem;
-    overflow-wrap: anywhere;
-  }
   .story {
     grid-template-columns: 1fr;
   }
@@ -838,12 +777,6 @@ dialog.lb::backdrop {
   .mark {
     font-size: 1.15rem;
     line-height: 1.05;
-  }
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .grid .cap span {
-    display: none;
   }
 }
 @media (max-width: 860px) {
