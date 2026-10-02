@@ -33,6 +33,28 @@ document.querySelectorAll("[data-wa]").forEach((a) => {
   if (a.dataset.wa) a.href = wa(a.dataset.wa);
 });
 
+/* menu */
+const menuBtn = $("#menu-btn");
+const menu = $("#menu");
+function setMenu(open) {
+  menu.hidden = !open;
+  menuBtn.setAttribute("aria-expanded", String(open));
+  menuBtn.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+}
+menuBtn.addEventListener("click", () => setMenu(menu.hidden));
+menu.addEventListener("click", (e) => {
+  if (e.target.closest("a")) setMenu(false);
+});
+document.addEventListener("click", (e) => {
+  if (!menu.hidden && !e.target.closest("header")) setMenu(false);
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !menu.hidden) {
+    setMenu(false);
+    menuBtn.focus();
+  }
+});
+
 /* galeria de trabalhos */
 const grid = $("#grid"),
   SHOW = 12;
