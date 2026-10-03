@@ -2,7 +2,7 @@
 
 Proposta de landing page para a Alan Wheeling Pneus & Rodas (Aracaju, SE), com trabalhos e vídeos do Instagram @alanpneuserodas, simulador de rodas e roda 3D renderizada no Blender.
 
-> Proposta para apresentação. Antes de publicar, a loja precisa aprovar o uso das fotos, dos vídeos e da marca, e confirmar telefone e horário.
+> Proposta para apresentação. Antes de publicar, a loja precisa aprovar o uso das fotos, dos vídeos e da marca, e confirmar telefone e horário. Fotos e vídeos vêm do Instagram @alanpneuserodas.
 
 ## Como abrir no VS Code
 
@@ -22,14 +22,20 @@ alan-wheeling-site/
 ├─ pintura-eletrostatica.html  página do serviço de pintura eletrostática
 ├─ desempeno.html              página do desempeno (com a animação antes/depois)
 ├─ kits-rodas-e-pneus.html     página de kits e troca (com o simulador de rodas)
+├─ 404.html                    página de endereço não encontrado
+├─ sitemap.xml, robots.txt     para o Google achar as páginas
+├─ site.webmanifest, favicon.ico  ícones do site
 ├─ css/style.css               cores, fontes, layout e animações
 ├─ js/dados.js                 CONTATOS, GALERIA DE TRABALHOS e VÍDEOS  ← comece por aqui
-├─ js/comum.js                 partes de todas as páginas: menu, contato, WhatsApp, vídeos
+├─ js/comum.js                 partes de todas as páginas: menu, cabeçalho, botão do WhatsApp,
+│                              formulário de orçamento, fotos ampliadas e animações
 ├─ js/main.js                  página inicial: galeria e roda do topo
 ├─ js/desempeno.js             animação do aro empenado
 ├─ js/simulador.js             simulador de rodas
 └─ assets/
    ├─ img/
+   │  ├─ icones/               favicon e ícones do celular
+   │  ├─ og/                   imagens que aparecem ao compartilhar o link (1200×630)
    │  ├─ roda-hero.webp        roda 3D do topo
    │  ├─ historia-loja.webp    publicação fixada do Instagram
    │  ├─ fachada.webp
@@ -45,6 +51,8 @@ alan-wheeling-site/
 - **Adicionar um trabalho na galeria:** coloque a foto em `assets/img/trabalhos/` (formato 4:5, cerca de 540×675 px, WebP ou JPG) e acrescente um item na lista `TRABALHOS` em `js/dados.js`.
 - **Trocar um vídeo:** coloque `nome.mp4` e `nome-capa.jpg` em `assets/video/` e ajuste a lista `VIDEOS`. Vídeos em MP4 (H.264), verticais, curtos e sem som carregam mais rápido.
 - **Editar uma página de serviço:** os textos (quando fazer, etapas, fotos, dúvidas) estão direto no HTML de cada página. O menu e o bloco "Outros serviços" se repetem nas cinco páginas; se criar um serviço novo, acrescente o link em todas.
+- **Publicar com outro endereço:** o endereço provisório é `https://osmario2006.github.io/alanpneuserodas/`. Quando houver domínio próprio, troque esse texto em todos os arquivos `.html`, no `sitemap.xml` e no `robots.txt` (no VS Code: Ctrl+Shift+H). No `404.html`, ajuste também a linha `<base href="/alanpneuserodas/">` para `<base href="/">`.
+- **Cabeçalho, rodapé, orçamento e contato** se repetem nas páginas. Ao mudar um link ou texto deles, mude em todos os `.html`.
 - **Mudar cores:** as cores ficam no começo de `css/style.css`, no bloco `:root` (`--amber` é o amarelo da marca).
 
 ## Origem do material
