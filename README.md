@@ -17,10 +17,17 @@ Também funciona dando dois cliques em `index.html`, mas sem a atualização aut
 
 ```
 alan-wheeling-site/
-├─ index.html          estrutura da página (seções e textos fixos)
-├─ css/style.css       cores, fontes, layout e animações
-├─ js/dados.js         CONTATOS, GALERIA DE TRABALHOS e VÍDEOS  ← comece por aqui
-├─ js/main.js          comportamento: galeria, vídeos, desempeno, simulador
+├─ index.html                  página inicial (trabalhos, processo, serviços, história, contato)
+├─ diamantacao.html            página do serviço de diamantação CNC
+├─ pintura-eletrostatica.html  página do serviço de pintura eletrostática
+├─ desempeno.html              página do desempeno (com a animação antes/depois)
+├─ kits-rodas-e-pneus.html     página de kits e troca (com o simulador de rodas)
+├─ css/style.css               cores, fontes, layout e animações
+├─ js/dados.js                 CONTATOS, GALERIA DE TRABALHOS e VÍDEOS  ← comece por aqui
+├─ js/comum.js                 partes de todas as páginas: menu, contato, WhatsApp, vídeos
+├─ js/main.js                  página inicial: galeria e roda do topo
+├─ js/desempeno.js             animação do aro empenado
+├─ js/simulador.js             simulador de rodas
 └─ assets/
    ├─ img/
    │  ├─ roda-hero.webp        roda 3D do topo
@@ -37,6 +44,7 @@ alan-wheeling-site/
 - **Trocar telefone, endereço ou horário:** edite o objeto `LOJA` em `js/dados.js`.
 - **Adicionar um trabalho na galeria:** coloque a foto em `assets/img/trabalhos/` (formato 4:5, cerca de 540×675 px, WebP ou JPG) e acrescente um item na lista `TRABALHOS` em `js/dados.js`.
 - **Trocar um vídeo:** coloque `nome.mp4` e `nome-capa.jpg` em `assets/video/` e ajuste a lista `VIDEOS`. Vídeos em MP4 (H.264), verticais, curtos e sem som carregam mais rápido.
+- **Editar uma página de serviço:** os textos (quando fazer, etapas, fotos, dúvidas) estão direto no HTML de cada página. O menu e o bloco "Outros serviços" se repetem nas cinco páginas; se criar um serviço novo, acrescente o link em todas.
 - **Mudar cores:** as cores ficam no começo de `css/style.css`, no bloco `:root` (`--amber` é o amarelo da marca).
 
 ## Origem do material

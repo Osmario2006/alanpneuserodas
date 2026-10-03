@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Desempeno de rodas em Aracaju | Alan Wheeling Pneus e Rodas</title>
+    <meta name="description" content="Desempeno de rodas em Aracaju. Bateu em buraco e o volante vibra? A roda é medida e endireitada na loja." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;1,800;1,900&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="brand" href="index.html" aria-label="Alan Wheeling, página inicial">
+          <img class="logo" src="assets/img/logo.webp" alt="" width="360" height="321" />
+          <div class="mark" id="m-nome"></div>
+        </a>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="menu" id="menu" hidden>
+          <a href="index.html">Início</a>
+          <a href="index.html#trabalhos">Trabalhos</a>
+          <a href="index.html#servicos">Serviços</a>
+          <a class="sub" href="diamantacao.html">Diamantação CNC</a>
+          <a class="sub" href="pintura-eletrostatica.html">Pintura eletrostática</a>
+          <a class="sub" href="desempeno.html" aria-current="page">Desempeno</a>
+          <a class="sub" href="kits-rodas-e-pneus.html">Kits e troca</a>
+          <a href="kits-rodas-e-pneus.html#simulador">Simulador</a>
+          <a href="index.html#historia">Nossa história</a>
+          <a href="#contato">Contato</a>
+        </nav>
+      </header>
+
+      <div class="shero">
+        <div>
+          <nav class="crumb" aria-label="Você está em">
+            <a href="index.html">Início</a> / <a href="index.html#servicos">Serviços</a> / Desempeno de rodas
+          </nav>
+          <h1>Desempeno <span>de rodas</span></h1>
+          <p class="lead">Bateu em buraco e o volante começou a vibrar? A roda é medida na máquina, endireitada no ponto exato do empeno e conferida até girar redonda de novo.</p>
+          <div class="cbtns">
+            <a class="btn" data-wa="Olá! Vim pelo site e acho que minha roda está empenada." href="#contato">Pedir orçamento</a
+            ><a class="btn ghost" href="#etapas">Como é feito</a>
+          </div>
+        </div>
+        <div class="vid">
+          <video
+            data-auto
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="assets/video/desempeno-capa.jpg"
+            aria-label="Roda girando na máquina de desempeno"
+          >
+            <source src="assets/video/desempeno.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker" aria-hidden="true"><div id="tk"></div></div>
+
+    <div class="wrap">
+      <section id="quando">
+        <div class="head">
+          <h2>Sinais de roda empenada</h2>
+          <p>Se o carro tem um destes sintomas depois de uma pancada, vale mandar a foto.</p>
+        </div>
+        <ul class="checks">
+          <li><b>Volante vibrando</b><span>A vibração aparece numa faixa de velocidade, quase sempre na estrada.</span></li>
+          <li><b>Balanceamento não resolve</b><span>A roda foi balanceada e o carro continua tremendo.</span></li>
+          <li><b>Pneu perdendo ar</b><span>O pneu esvazia devagar porque a borda do aro não veda mais.</span></li>
+          <li><b>Aro amassado</b><span>Dá para ver a dobra na borda da roda depois do buraco.</span></li>
+        </ul>
+      </section>
+      <section id="demo">
+        <div class="fix">
+          <div class="head" style="margin: 0">
+            <h2>Veja o que o desempeno corrige</h2>
+            <p>
+              Uma roda empenada gira fora do círculo. É isso que o cliente sente como vibração no
+              volante. Aperte os botões para comparar a roda antes e depois do serviço.
+            </p>
+          </div>
+          <div class="fixbox">
+            <svg
+              viewBox="0 0 320 320"
+              role="img"
+              aria-label="Aro de roda girando, primeiro empenado e depois reto"
+            >
+              <circle
+                cx="160"
+                cy="160"
+                r="118"
+                fill="none"
+                stroke="#3a3926"
+                stroke-width="2"
+                stroke-dasharray="4 6"
+              />
+              <path
+                id="rim"
+                fill="none"
+                stroke="#f5b800"
+                stroke-width="9"
+                stroke-linejoin="round"
+              />
+              <g id="hub" stroke="#aaa794" stroke-width="3" fill="none">
+                <circle cx="160" cy="160" r="16" />
+                <path d="M160 144V90M160 176v54M144 160H90M176 160h54" />
+              </g>
+            </svg>
+            <div class="seg" role="group" aria-label="Estado da roda">
+              <button type="button" id="b-antes" aria-pressed="true">Antes</button
+              ><button type="button" id="b-depois" aria-pressed="false">Depois</button>
+            </div>
+            <div class="read" id="fixread"></div>
+          </div>
+        </div>
+      </section>
+      <section id="etapas">
+        <div class="head">
+          <h2>Como é feito</h2>
+          <p>A roda só sai da máquina quando volta a girar dentro da medida.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Medição</h3>
+            <p>A roda gira na máquina e o relógio mostra onde e quanto ela está fora.</p>
+          </li>
+          <li>
+            <h3>Desempeno</h3>
+            <p>A máquina faz força só no ponto empenado, aos poucos, até o aro voltar.</p>
+          </li>
+          <li>
+            <h3>Conferência</h3>
+            <p>A roda gira de novo e é medida, até o desvio sumir.</p>
+          </li>
+          <li>
+            <h3>Montagem</h3>
+            <p>O pneu volta para a roda e o conjunto é balanceado.</p>
+          </li>
+        </ol>
+      </section>
+      <section id="duvidas">
+        <div class="head">
+          <h2>Dúvidas comuns</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Toda roda empenada tem conserto?</summary>
+            <p>Depende do tamanho do dano. A loja mede a roda e diz se o desempeno resolve ou se é melhor trocar.</p>
+          </details>
+          <details>
+            <summary>E se a roda estiver trincada?</summary>
+            <p>A trinca é avaliada na loja. Em muitos casos dá para recuperar com solda de alumínio; quando não é seguro, a loja avisa.</p>
+          </details>
+          <details>
+            <summary>Preciso levar o carro?</summary>
+            <p>Pode trazer o carro ou só a roda. Se trouxer o carro, a loja já desmonta e monta de volta.</p>
+          </details>
+          <details>
+            <summary>Quanto custa e quanto tempo leva?</summary>
+            <p>Depende do aro e do tamanho do empeno. Mande a foto pelo WhatsApp e a loja informa valor e prazo.</p>
+          </details>
+        </div>
+      </section>
+
+      <div class="cta">
+        <div>
+          <h2>Volante tremendo? Mande a foto da roda</h2>
+          <p>Mande a foto da roda pelo WhatsApp e receba o orçamento.</p>
+        </div>
+        <a class="btn" data-wa="Olá! Vim pelo site e acho que minha roda está empenada." href="#contato">Chamar no WhatsApp</a>
+      </div>
+
+      <section id="outros">
+        <div class="head">
+          <h2>Outros serviços da loja</h2>
+          <p>Muitos projetos juntam mais de um serviço na mesma visita.</p>
+        </div>
+        <div class="svc outros">
+          <a href="diamantacao.html">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" /><path d="M24 8l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z" /></svg>
+            <h3>Diamantação CNC</h3>
+            <p>Face usinada no torno CNC, com brilho espelhado de roda nova.</p>
+            <span class="more">Ver serviço</span>
+          </a>
+          <a href="pintura-eletrostatica.html">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 12h24v10H10zM34 17h5v10H24v6" /><rect x="21" y="33" width="6" height="8" rx="1" /></svg>
+            <h3>Pintura eletrostática</h3>
+            <p>Pintura a pó curada no forno, na cor que o projeto pedir.</p>
+            <span class="more">Ver serviço</span>
+          </a>
+          <a href="kits-rodas-e-pneus.html">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 18h26l-6-6M40 30H14l6 6" /></svg>
+            <h3>Kits e troca</h3>
+            <p>Rodas e pneus novos, troca de usadas, montagem e alinhamento 3D.</p>
+            <span class="more">Ver serviço</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="contato" class="contact">
+        <div class="head" style="margin: 0">
+          <h2>Fale com a loja</h2>
+          <p>A resposta mais rápida vem pelo WhatsApp. Mande a foto da roda e o modelo do carro.</p>
+          <div class="cbtns">
+            <a class="btn" data-wa="Olá! Vim pelo site e acho que minha roda está empenada." href="#contato">Chamar no WhatsApp</a
+            ><a class="btn ghost" id="mapa" target="_blank" rel="noopener" href="#contato"
+              >Abrir no mapa</a
+            >
+          </div>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Endereço</dt>
+            <dd id="c-end"></dd>
+          </div>
+          <div>
+            <dt>WhatsApp</dt>
+            <dd id="c-wa"></dd>
+          </div>
+          <div>
+            <dt>Horário</dt>
+            <dd id="c-hor"></dd>
+          </div>
+          <div>
+            <dt>Instagram</dt>
+            <dd>
+              <a href="https://www.instagram.com/alanpneuserodas/" target="_blank" rel="noopener"
+                >@alanpneuserodas</a
+              >
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+    <div class="wrap">
+      <footer>
+        Proposta de site para a Alan Wheeling Pneus &amp; Rodas. Fotos e vídeos do Instagram
+        @alanpneuserodas. Horário e telefone devem ser confirmados com a loja antes de publicar.
+      </footer>
+    </div>
+
+    <script src="js/dados.js"></script>
+    <script src="js/comum.js"></script>
+    <script src="js/desempeno.js"></script>
+  </body>
+</html>

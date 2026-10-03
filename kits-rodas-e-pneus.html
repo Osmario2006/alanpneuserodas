@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Kits de rodas e pneus em Aracaju | Alan Wheeling Pneus e Rodas</title>
+    <meta name="description" content="Kits de rodas e pneus em Aracaju: rodas novas e usadas, troca, mudança de furação, montagem, balanceamento e alinhamento 3D." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;1,800;1,900&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="brand" href="index.html" aria-label="Alan Wheeling, página inicial">
+          <img class="logo" src="assets/img/logo.webp" alt="" width="360" height="321" />
+          <div class="mark" id="m-nome"></div>
+        </a>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="menu" id="menu" hidden>
+          <a href="index.html">Início</a>
+          <a href="index.html#trabalhos">Trabalhos</a>
+          <a href="index.html#servicos">Serviços</a>
+          <a class="sub" href="diamantacao.html">Diamantação CNC</a>
+          <a class="sub" href="pintura-eletrostatica.html">Pintura eletrostática</a>
+          <a class="sub" href="desempeno.html">Desempeno</a>
+          <a class="sub" href="kits-rodas-e-pneus.html" aria-current="page">Kits e troca</a>
+          <a href="kits-rodas-e-pneus.html#simulador">Simulador</a>
+          <a href="index.html#historia">Nossa história</a>
+          <a href="#contato">Contato</a>
+        </nav>
+      </header>
+
+      <div class="shero">
+        <div>
+          <nav class="crumb" aria-label="Você está em">
+            <a href="index.html">Início</a> / <a href="index.html#servicos">Serviços</a> / Kits de rodas e pneus
+          </nav>
+          <h1>Kits de rodas <span>e pneus</span></h1>
+          <p class="lead">Rodas e pneus novos, compra e troca de rodas usadas e mudança de furação. A montagem, o balanceamento e o alinhamento 3D são feitos na própria loja, e o carro sai pronto.</p>
+          <div class="cbtns">
+            <a class="btn" data-wa="Olá! Vim pelo site e queria um orçamento de kit de rodas e pneus." href="#contato">Pedir orçamento</a
+            ><a class="btn ghost" href="#etapas">Como é feito</a>
+          </div>
+        </div>
+        <div class="vid">
+          <video
+            data-auto
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="assets/video/transformacao-capa.jpg"
+            aria-label="Carro saindo da loja com rodas novas, em frente à parede de rodas"
+          >
+            <source src="assets/video/transformacao.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker" aria-hidden="true"><div id="tk"></div></div>
+
+    <div class="wrap">
+      <section id="quando">
+        <div class="head">
+          <h2>O que a loja faz</h2>
+          <p>Do aro 15 ao 22, para carro de passeio, SUV e picape.</p>
+        </div>
+        <ul class="checks">
+          <li><b>Kits de rodas e pneus</b><span>Rodas e pneus novos escolhidos para o seu carro, prontos para rodar.</span></li>
+          <li><b>Compra e troca de usadas</b><span>Leve suas rodas para avaliação e veja as opções da parede da loja.</span></li>
+          <li><b>Mudança de furação</b><span>A roda é furada na máquina para servir na furação do seu carro.</span></li>
+          <li><b>Montagem e alinhamento 3D</b><span>Pneus montados e balanceados, e o carro alinhado no 3D.</span></li>
+        </ul>
+      </section>
+      <section id="simulador">
+        <div class="head">
+          <h2>Veja a roda no seu carro antes de comprar</h2>
+          <p>
+            Escolha o estilo e o aro. O simulador mostra a roda no carro e a medida de pneu
+            indicada, e você manda o pedido pronto para a loja.
+          </p>
+        </div>
+        <div class="sim">
+          <canvas
+            id="cv"
+            width="2000"
+            height="897"
+            role="img"
+            aria-label="Volvo S60 com a roda escolhida"
+          ></canvas>
+          <div class="spec">
+            <span>Volvo S60 (exemplo)</span><span id="s1"></span><span id="s2"></span>
+          </div>
+          <div class="ctl">
+            <div>
+              <span class="t">Roda</span>
+              <div class="chips" id="estilos"></div>
+            </div>
+            <div>
+              <span class="t">Aro</span>
+              <div class="chips" id="aros"></div>
+            </div>
+            <a class="btn" id="wa-sim" data-wa="" href="#contato">Pedir orçamento desta roda</a>
+          </div>
+        </div>
+        <p class="note">
+          Medida sugerida pelo simulador. A loja confirma a compatibilidade exata com o seu carro no
+          atendimento.
+        </p>
+      </section>
+      <section id="fotos">
+        <div class="head">
+          <h2>Carros que saíram da loja</h2>
+          <p>Publicações do Instagram da loja. Toque numa foto para ver o post.</p>
+        </div>
+        <div class="gal">
+          <a href="https://www.instagram.com/p/Dc4YLYFzhCE/" target="_blank" rel="noopener" aria-label="Trailblazer aro 22, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/trabalhos/02-trailblazer-aro-22.webp" /><span>Trailblazer aro 22</span>
+          </a>
+          <a href="https://www.instagram.com/p/Dd4xSDOxZG9/" target="_blank" rel="noopener" aria-label="Aro 20 com mudança de furação, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/trabalhos/01-rodas-aro-20.webp" /><span>Aro 20 com mudança de furação</span>
+          </a>
+          <a href="https://www.instagram.com/p/DbHOK9yB37u/" target="_blank" rel="noopener" aria-label="Picape aro 20 com pneu AT, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/trabalhos/16-picape-aro-20.webp" /><span>Picape aro 20 com pneu AT</span>
+          </a>
+          <a href="https://www.instagram.com/p/DdMt5AWztVx/" target="_blank" rel="noopener" aria-label="Kit aro 15 com alinhamento 3D, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/trabalhos/07-kit-aro-15.webp" /><span>Kit aro 15 com alinhamento 3D</span>
+          </a>
+          <a href="https://www.instagram.com/p/DbCBVh9xrCY/" target="_blank" rel="noopener" aria-label="BYD aro 20, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/trabalhos/04-byd-aro-20.webp" /><span>BYD aro 20</span>
+          </a>
+          <a href="https://www.instagram.com/p/DcPOUOlR5JF/" target="_blank" rel="noopener" aria-label="Kit aro 17, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/trabalhos/11-kit-aro-17.webp" /><span>Kit aro 17</span>
+          </a>
+          <a href="https://www.instagram.com/p/Db4BOseB0SS/" target="_blank" rel="noopener" aria-label="Fusca com BBS, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/trabalhos/05-fusca-com-bbs.webp" /><span>Fusca com BBS</span>
+          </a>
+          <a href="https://www.instagram.com/p/DbJrxqyRvMV/" target="_blank" rel="noopener" aria-label="Máquina de furação de rodas, ver no Instagram">
+            <img alt="" loading="lazy" src="assets/img/processo/06-maquina-de-furacao-de-rodas.webp" /><span>Máquina de furação de rodas</span>
+          </a>
+        </div>
+      </section>
+      <section id="etapas">
+        <div class="head">
+          <h2>Como funciona a compra</h2>
+          <p>Do primeiro contato ao carro pronto.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Diga o carro</h3>
+            <p>Mande o modelo, o ano e o aro que você quer pelo WhatsApp.</p>
+          </li>
+          <li>
+            <h3>Escolha o kit</h3>
+            <p>A loja indica rodas e pneus que servem, com valores.</p>
+          </li>
+          <li>
+            <h3>Montagem</h3>
+            <p>Pneus montados e balanceados; furação ajustada se precisar.</p>
+          </li>
+          <li>
+            <h3>Alinhamento 3D</h3>
+            <p>O carro é alinhado e sai da loja pronto para rodar.</p>
+          </li>
+        </ol>
+      </section>
+      <section id="duvidas">
+        <div class="head">
+          <h2>Dúvidas comuns</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Como sei se a roda serve no meu carro?</summary>
+            <p>A loja confere furação, medida e a altura do pneu pelo modelo do carro. O simulador dá uma ideia, mas a confirmação é sempre no atendimento.</p>
+          </details>
+          <details>
+            <summary>Vocês mudam a furação da roda?</summary>
+            <p>Sim. A loja tem máquina de furação de rodas e adapta a roda para a furação do seu carro.</p>
+          </details>
+          <details>
+            <summary>Posso dar minhas rodas na troca?</summary>
+            <p>A loja compra e troca rodas usadas. Leve as suas ou mande a foto para avaliação.</p>
+          </details>
+          <details>
+            <summary>O alinhamento está incluso?</summary>
+            <p>A montagem, o balanceamento e o alinhamento 3D são feitos na loja. Pergunte no orçamento o que entra no valor do kit.</p>
+          </details>
+        </div>
+      </section>
+
+      <div class="cta">
+        <div>
+          <h2>Monte o kit do seu carro</h2>
+          <p>Mande a foto da roda pelo WhatsApp e receba o orçamento.</p>
+        </div>
+        <a class="btn" data-wa="Olá! Vim pelo site e queria um orçamento de kit de rodas e pneus." href="#contato">Chamar no WhatsApp</a>
+      </div>
+
+      <section id="outros">
+        <div class="head">
+          <h2>Outros serviços da loja</h2>
+          <p>Muitos projetos juntam mais de um serviço na mesma visita.</p>
+        </div>
+        <div class="svc outros">
+          <a href="diamantacao.html">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" /><path d="M24 8l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z" /></svg>
+            <h3>Diamantação CNC</h3>
+            <p>Face usinada no torno CNC, com brilho espelhado de roda nova.</p>
+            <span class="more">Ver serviço</span>
+          </a>
+          <a href="pintura-eletrostatica.html">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 12h24v10H10zM34 17h5v10H24v6" /><rect x="21" y="33" width="6" height="8" rx="1" /></svg>
+            <h3>Pintura eletrostática</h3>
+            <p>Pintura a pó curada no forno, na cor que o projeto pedir.</p>
+            <span class="more">Ver serviço</span>
+          </a>
+          <a href="desempeno.html">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="15" /><circle cx="24" cy="24" r="4" /><path d="M24 9v11M24 28v11M9 24h11M28 24h11" /></svg>
+            <h3>Desempeno</h3>
+            <p>Roda medida e endireitada para girar sem balanço.</p>
+            <span class="more">Ver serviço</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="contato" class="contact">
+        <div class="head" style="margin: 0">
+          <h2>Fale com a loja</h2>
+          <p>A resposta mais rápida vem pelo WhatsApp. Mande a foto da roda e o modelo do carro.</p>
+          <div class="cbtns">
+            <a class="btn" data-wa="Olá! Vim pelo site e queria um orçamento de kit de rodas e pneus." href="#contato">Chamar no WhatsApp</a
+            ><a class="btn ghost" id="mapa" target="_blank" rel="noopener" href="#contato"
+              >Abrir no mapa</a
+            >
+          </div>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Endereço</dt>
+            <dd id="c-end"></dd>
+          </div>
+          <div>
+            <dt>WhatsApp</dt>
+            <dd id="c-wa"></dd>
+          </div>
+          <div>
+            <dt>Horário</dt>
+            <dd id="c-hor"></dd>
+          </div>
+          <div>
+            <dt>Instagram</dt>
+            <dd>
+              <a href="https://www.instagram.com/alanpneuserodas/" target="_blank" rel="noopener"
+                >@alanpneuserodas</a
+              >
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+    <div class="wrap">
+      <footer>
+        Proposta de site para a Alan Wheeling Pneus &amp; Rodas. Fotos e vídeos do Instagram
+        @alanpneuserodas. Horário e telefone devem ser confirmados com a loja antes de publicar.
+      </footer>
+    </div>
+
+    <script src="js/dados.js"></script>
+    <script src="js/comum.js"></script>
+    <script src="js/simulador.js"></script>
+  </body>
+</html>

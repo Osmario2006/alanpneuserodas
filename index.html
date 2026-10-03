@@ -19,10 +19,10 @@
   <body>
     <div class="wrap">
       <header>
-        <div class="brand">
-          <img class="logo" src="assets/img/logo.webp" alt="Logo Alan Wheeling" width="360" height="321" />
+        <a class="brand" href="index.html" aria-label="Alan Wheeling, página inicial">
+          <img class="logo" src="assets/img/logo.webp" alt="" width="360" height="321" />
           <div class="mark" id="m-nome"></div>
-        </div>
+        </a>
         <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
           <span></span><span></span><span></span>
         </button>
@@ -30,7 +30,11 @@
           <a href="#trabalhos">Trabalhos</a>
           <a href="#processo">Processo</a>
           <a href="#servicos">Serviços</a>
-          <a href="#simulador">Simulador</a>
+          <a class="sub" href="diamantacao.html">Diamantação CNC</a>
+          <a class="sub" href="pintura-eletrostatica.html">Pintura eletrostática</a>
+          <a class="sub" href="desempeno.html">Desempeno</a>
+          <a class="sub" href="kits-rodas-e-pneus.html">Kits e troca</a>
+          <a href="kits-rodas-e-pneus.html#simulador">Simulador</a>
           <a href="#historia">Nossa história</a>
           <a href="#como">Como funciona</a>
           <a href="#contato">Contato</a>
@@ -91,10 +95,10 @@
       <section id="servicos">
         <div class="head">
           <h2>Serviços da loja</h2>
-          <p>Da roda riscada ao kit completo, tudo é feito na própria loja.</p>
+          <p>Da roda riscada ao kit completo, tudo é feito na própria loja. Toque num serviço para ver como é feito.</p>
         </div>
         <div class="svc">
-          <article>
+          <a href="diamantacao.html">
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <circle cx="24" cy="24" r="16" />
               <path d="M24 8l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z" />
@@ -104,8 +108,9 @@
               A face da roda é usinada no torno CNC e fica com o brilho espelhado de roda nova de
               fábrica.
             </p>
-          </article>
-          <article>
+            <span class="more">Ver serviço</span>
+          </a>
+          <a href="pintura-eletrostatica.html">
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <path d="M10 12h24v10H10zM34 17h5v10H24v6" />
               <rect x="21" y="33" width="6" height="8" rx="1" />
@@ -115,8 +120,9 @@
               Pintura a pó, curada no forno, em preto, grafite, black piano ou na cor que o projeto
               pedir.
             </p>
-          </article>
-          <article>
+            <span class="more">Ver serviço</span>
+          </a>
+          <a href="desempeno.html">
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <circle cx="24" cy="24" r="15" />
               <circle cx="24" cy="24" r="4" />
@@ -127,8 +133,9 @@
               Bateu em buraco e o volante vibra? A roda é medida e endireitada para girar sem
               balanço.
             </p>
-          </article>
-          <article>
+            <span class="more">Ver serviço</span>
+          </a>
+          <a href="kits-rodas-e-pneus.html">
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <path d="M8 18h26l-6-6M40 30H14l6 6" />
             </svg>
@@ -137,90 +144,9 @@
               Rodas e pneus novos, compra e troca de usadas, com montagem, balanceamento e
               alinhamento 3D.
             </p>
-          </article>
+            <span class="more">Ver serviço</span>
+          </a>
         </div>
-      </section>
-
-      <section id="desempeno">
-        <div class="fix">
-          <div class="head" style="margin: 0">
-            <h2>Veja o que o desempeno corrige</h2>
-            <p>
-              Uma roda empenada gira fora do círculo. É isso que o cliente sente como vibração no
-              volante. Aperte os botões para comparar a roda antes e depois do serviço.
-            </p>
-          </div>
-          <div class="fixbox">
-            <svg
-              viewBox="0 0 320 320"
-              role="img"
-              aria-label="Aro de roda girando, primeiro empenado e depois reto"
-            >
-              <circle
-                cx="160"
-                cy="160"
-                r="118"
-                fill="none"
-                stroke="#3a3926"
-                stroke-width="2"
-                stroke-dasharray="4 6"
-              />
-              <path
-                id="rim"
-                fill="none"
-                stroke="#f5b800"
-                stroke-width="9"
-                stroke-linejoin="round"
-              />
-              <g id="hub" stroke="#aaa794" stroke-width="3" fill="none">
-                <circle cx="160" cy="160" r="16" />
-                <path d="M160 144V90M160 176v54M144 160H90M176 160h54" />
-              </g>
-            </svg>
-            <div class="seg" role="group" aria-label="Estado da roda">
-              <button type="button" id="b-antes" aria-pressed="true">Antes</button
-              ><button type="button" id="b-depois" aria-pressed="false">Depois</button>
-            </div>
-            <div class="read" id="fixread"></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="simulador">
-        <div class="head">
-          <h2>Veja a roda no seu carro antes de comprar</h2>
-          <p>
-            Escolha o estilo e o aro. O simulador mostra a roda no carro e a medida de pneu
-            indicada, e você manda o pedido pronto para a loja.
-          </p>
-        </div>
-        <div class="sim">
-          <canvas
-            id="cv"
-            width="2000"
-            height="897"
-            role="img"
-            aria-label="Volvo S60 com a roda escolhida"
-          ></canvas>
-          <div class="spec">
-            <span>Volvo S60 (exemplo)</span><span id="s1"></span><span id="s2"></span>
-          </div>
-          <div class="ctl">
-            <div>
-              <span class="t">Roda</span>
-              <div class="chips" id="estilos"></div>
-            </div>
-            <div>
-              <span class="t">Aro</span>
-              <div class="chips" id="aros"></div>
-            </div>
-            <a class="btn" id="wa-sim" data-wa="" href="#contato">Pedir orçamento desta roda</a>
-          </div>
-        </div>
-        <p class="note">
-          Medida sugerida pelo simulador. A loja confirma a compatibilidade exata com o seu carro no
-          atendimento.
-        </p>
       </section>
 
       <section id="historia">
@@ -339,6 +265,7 @@
     </div>
 
     <script src="js/dados.js"></script>
+    <script src="js/comum.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
