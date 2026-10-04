@@ -118,6 +118,14 @@
 }
 .mo .wheelbox::before {
   translate: var(--gx, 0px) var(--gy, 0px);
+  scale: var(--luz, 1);
+}
+/* mouse em cima da roda: cresce, acompanha o cursor e gira de leve
+   (propriedades separadas, para não brigar com o transform da entrada e da rolagem) */
+.mo .wheelbox img {
+  translate: var(--mx, 0px) var(--my, 0px);
+  rotate: var(--rz, 0deg);
+  scale: var(--zoom, 1);
 }
 
 /* ---------- faixa amarela reage à velocidade da rolagem ---------- */

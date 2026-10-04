@@ -131,16 +131,26 @@
   const caixa = document.querySelector(".wheelbox");
   const hero = document.querySelector(".hero");
   const mira = { x: 0, y: 0 },
-    tilt = { x: 0, y: 0 };
+    tilt = { x: 0, y: 0 },
+    /* com o mouse em cima da roda: ela cresce, vai na direção do cursor e gira um pouco */
+    sobre = { x: 0, y: 0, z: 0 },
+    sobreAlvo = { x: 0, y: 0, z: 0 };
   if (caixa && hero && fino) {
     hero.addEventListener("pointermove", (e) => {
       const r = hero.getBoundingClientRect();
       mira.x = ((e.clientX - r.left) / r.width - 0.5) * 2;
       mira.y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      const c = caixa.getBoundingClientRect();
+      const dentro =
+        e.clientX >= c.left && e.clientX <= c.right && e.clientY >= c.top && e.clientY <= c.bottom;
+      sobreAlvo.x = dentro ? ((e.clientX - c.left) / c.width - 0.5) * 2 : 0;
+      sobreAlvo.y = dentro ? ((e.clientY - c.top) / c.height - 0.5) * 2 : 0;
+      sobreAlvo.z = dentro ? 1 : 0;
       acordar();
     });
     hero.addEventListener("pointerleave", () => {
       mira.x = mira.y = 0;
+      sobreAlvo.x = sobreAlvo.y = sobreAlvo.z = 0;
       acordar();
     });
   }
@@ -262,6 +272,14 @@
       caixa.style.setProperty("--rx", `${(-tilt.y * 7).toFixed(2)}deg`);
       caixa.style.setProperty("--gx", `${(tilt.x * -18).toFixed(1)}px`);
       caixa.style.setProperty("--gy", `${(tilt.y * -14).toFixed(1)}px`);
+      sobre.x = lerp(sobre.x, sobreAlvo.x, 0.1);
+      sobre.y = lerp(sobre.y, sobreAlvo.y, 0.1);
+      sobre.z = lerp(sobre.z, sobreAlvo.z, 0.1);
+      caixa.style.setProperty("--mx", `${(sobre.x * 12).toFixed(1)}px`);
+      caixa.style.setProperty("--my", `${(sobre.y * 10).toFixed(1)}px`);
+      caixa.style.setProperty("--rz", `${(sobre.x * 6).toFixed(2)}deg`);
+      caixa.style.setProperty("--zoom", (1 + sobre.z * 0.04).toFixed(4));
+      caixa.style.setProperty("--luz", (1 + sobre.z * 0.6).toFixed(3));
     }
 
     if (sx) cenaSx(vh);
@@ -270,7 +288,10 @@
       Math.abs(vel) < 0.05 &&
       Math.abs(tkTaxa - 1) < 0.01 &&
       Math.abs(tilt.x - mira.x) < 0.002 &&
-      Math.abs(tilt.y - mira.y) < 0.002;
+      Math.abs(tilt.y - mira.y) < 0.002 &&
+      Math.abs(sobre.x - sobreAlvo.x) < 0.002 &&
+      Math.abs(sobre.y - sobreAlvo.y) < 0.002 &&
+      Math.abs(sobre.z - sobreAlvo.z) < 0.002;
     if (quieto) {
       rodando = false;
       if (tkAnim) tkAnim.playbackRate = 1;
