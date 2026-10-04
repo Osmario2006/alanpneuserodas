@@ -1470,3 +1470,357 @@ dialog.lb::backdrop {
     transition: none;
   }
 }
+
+/* ===== celular =====
+   A maior parte das visitas vem do Instagram, no celular. Aqui ficam os ajustes
+   para telas pequenas e para toque: nada de rolagem para o lado, áreas de toque
+   de pelo menos 44 px e o orçamento sempre a um toque. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+/* página travada na largura da tela: nada pode arrastar o site para os lados.
+   O celular (principalmente o iPhone) ignora o corte só no body, então ele vale
+   também no html. "clip" corta sem criar rolagem e mantém o cabeçalho fixo. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+}
+/* a faixa amarela é girada e inclina com a rolagem: ela mesma corta as pontas */
+.ticker {
+  contain: paint;
+}
+/* galeria que desliza para o lado: o gesto fica nela e não move a página */
+.grid {
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+}
+a,
+button,
+summary,
+select {
+  -webkit-tap-highlight-color: rgba(245, 184, 0, 0.18);
+  touch-action: manipulation;
+}
+/* no toque, o efeito de passar o mouse fica preso depois do toque */
+@media (hover: none) {
+  .btn:hover,
+  .wa-float:hover {
+    transform: none;
+  }
+  .grid button:hover img,
+  .strip a:hover img,
+  .gal a:hover img {
+    transform: none;
+  }
+}
+
+@media (max-width: 860px) {
+  /* o mapa tinha largura mínima de 735 px e empurrava a página para o lado */
+  .mapa {
+    aspect-ratio: auto;
+    height: 300px;
+    min-height: 0;
+  }
+  .vid {
+    justify-self: center;
+    max-height: 70svh;
+    width: auto;
+    max-width: 100%;
+  }
+  .gal {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .gal span {
+    padding: 22px 9px 8px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 560px) {
+  section {
+    padding-top: 56px;
+  }
+  .head {
+    margin-bottom: 26px;
+  }
+
+  /* topo: título, botões lado a lado e números numa linha, roda logo abaixo */
+  .hero {
+    gap: 8px;
+    padding-block: 12px 40px;
+  }
+  .hero p.lead,
+  .shero p.lead {
+    font-size: 1.08rem;
+    margin-block: 16px 22px;
+  }
+  .hero .cbtns,
+  .shero .cbtns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .hero .cbtns .btn,
+  .shero .cbtns .btn {
+    padding-inline: 12px;
+    min-height: 50px;
+  }
+  @media (max-width: 380px) {
+    .hero .cbtns .btn,
+    .shero .cbtns .btn {
+      font-size: 0.95rem;
+      padding-inline: 8px;
+    }
+  }
+  .hero .proof {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 26px;
+  }
+  .hero .proof b {
+    font-size: clamp(1.3rem, 6.2vw, 1.7rem);
+    white-space: nowrap;
+  }
+  .hero .proof span {
+    font-size: 0.82rem;
+    line-height: 1.25;
+  }
+  .wheelbox {
+    max-width: min(86vw, 360px);
+    margin-top: 8px;
+  }
+
+  /* palavras longas como ELETROSTÁTICA cabem na tela de 360 px */
+  .shero h1 {
+    font-size: clamp(2rem, 10.4vw, 2.6rem);
+  }
+
+  /* textos pequenos sobre fotos ficam legíveis */
+  .grid .cap span {
+    font-size: 0.88rem;
+  }
+  .strip span {
+    font-size: 0.8rem;
+  }
+
+  /* áreas de toque */
+  .crumb a {
+    display: inline-block;
+    padding-block: 10px;
+  }
+  .crumb {
+    margin-bottom: 8px;
+  }
+  .chip,
+  .seg button {
+    min-height: 44px;
+  }
+  .rodape ul {
+    gap: 0;
+  }
+  .rodape ul li {
+    padding-block: 9px;
+  }
+  .rodape ul li > a:only-child {
+    display: block;
+    margin-block: -9px;
+    padding-block: 9px;
+  }
+  .rod-base a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* contato: botões ocupam a largura toda */
+  .contact .cbtns {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .facts dd {
+    overflow-wrap: anywhere;
+  }
+  .igband .btn {
+    width: 100%;
+  }
+}
+
+/* ===== barra de ações fixa no celular =====
+   Orçamento e WhatsApp sempre à mão, sem cobrir o formulário nem o contato. */
+.barra-cel {
+  display: none;
+}
+@media (max-width: 560px) {
+  .wa-float {
+    display: none;
+  }
+  .barra-cel {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(14, 14, 11, 0.94);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+    transition:
+      transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+      opacity 0.3s;
+  }
+  .barra-cel.fora {
+    transform: translateY(110%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .barra-cel a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .barra-cel .b-orc {
+    background: var(--amber);
+    color: var(--amberink);
+  }
+  .barra-cel .b-wa {
+    background: #25d366;
+    color: #062b14;
+  }
+  .barra-cel svg {
+    width: 22px;
+    height: 22px;
+    flex: none;
+  }
+  /* espaço para a barra não cobrir o fim da página */
+  body {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+}
+@media (max-width: 560px) and (prefers-reduced-motion: reduce) {
+  .barra-cel {
+    transition: none;
+  }
+}
+
+/* ===== celular: tela inteira =====
+   No celular os blocos vão de borda a borda, o topo ocupa a primeira tela
+   inteira e o fundo escuro cobre até a área do "puxar" da rolagem. */
+html {
+  background: var(--ink);
+}
+@media (max-width: 560px) {
+  /* a primeira tela é toda do topo: título, botões, números e a roda */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100svh - 72px);
+  }
+  /* a roda ocupa o espaço que sobra da primeira tela, sem passar dela */
+  .hero .wheelbox {
+    flex: 1 1 0;
+    min-height: 170px;
+    max-width: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero .wheelbox img {
+    width: auto;
+    height: 100%;
+    max-height: min(86vw, 380px);
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .hero .wheelbox::before {
+    inset: 6% 16%;
+  }
+
+  /* blocos de borda a borda (o site tem 16 px de margem nas laterais) */
+  .grid,
+  .strip,
+  .gal,
+  .svc,
+  .checks,
+  .sim,
+  .fixbox,
+  .form,
+  .mapa,
+  .igband,
+  .cta,
+  .story .pics {
+    margin-inline: -16px;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+  .grid {
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
+  }
+  .form,
+  .fixbox,
+  .igband,
+  .cta {
+    padding-inline: 16px;
+  }
+  /* cards de serviço viram uma lista compacta: ícone, texto e seta na mesma linha */
+  .svc a,
+  .svc article {
+    grid-template-columns: 34px 1fr auto;
+    align-items: center;
+    gap: 3px 14px;
+    padding: 16px;
+  }
+  .svc svg {
+    grid-row: 1 / span 2;
+    width: 34px;
+    height: 34px;
+  }
+  .svc h3,
+  .svc.outros h3 {
+    font-size: 1.3rem;
+  }
+  .svc p {
+    grid-column: 2;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .svc .more {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin: 0;
+    font-size: 0;
+  }
+  .svc .more::after {
+    content: "→";
+    font-size: 1.4rem;
+    color: var(--amber);
+  }
+  .checks li {
+    padding-inline: 54px 16px;
+  }
+  .checks li::before {
+    left: 16px;
+  }
+  .sim .spec,
+  .sim .ctl {
+    padding-inline: 16px;
+  }
+  .rodape {
+    margin-inline: -16px;
+  }
+}

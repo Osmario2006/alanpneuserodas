@@ -1,0 +1,515 @@
+/* Motion: animações ligadas à rolagem e microinterações.
+   Tudo aqui só vale com a classe .mo no <html>, que o js/motion.js coloca quando o
+   visitante não pediu menos movimento no sistema. Sem JavaScript, ou com
+   "reduzir movimento" ligado, o site aparece completo e parado. */
+
+/* ---------- troca de página suave (Chrome, Edge e Safari recentes) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root) {
+    animation: vt-sai 0.28s cubic-bezier(0.4, 0, 1, 1) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-entra 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+@keyframes vt-sai {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+@keyframes vt-entra {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* ---------- barra de progresso da leitura ---------- */
+.mo-barra {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  z-index: 40;
+  background: var(--amber);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* ---------- cabeçalho some ao descer e volta ao subir ---------- */
+.mo .top {
+  transition:
+    border-color 0.2s,
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mo .top.esconde {
+  transform: translateY(-100%);
+}
+
+/* ---------- títulos: palavras sobem de dentro de uma máscara ---------- */
+.pw {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* folga para o itálico e a acentuação não serem cortados */
+  padding: 0.08em 0.12em 0.1em 0.02em;
+  margin: -0.08em -0.12em -0.1em -0.02em;
+}
+.pw > span {
+  display: inline-block;
+}
+.mo .pw > span {
+  transform: translateY(112%) rotate(4deg);
+  transform-origin: 0 100%;
+  transition: transform 0.9s cubic-bezier(0.2, 0.75, 0.15, 1);
+  transition-delay: calc(var(--i, 0) * 55ms + var(--d0, 0ms));
+}
+.mo .vis .pw > span,
+.mo .pw.vis > span {
+  transform: none;
+}
+/* rede de segurança: se algo travar, o título aparece mesmo assim */
+.mo .pw > span {
+  animation: pw-garantia 0s 2.5s forwards;
+}
+.mo .vis .pw > span {
+  animation: none;
+}
+@keyframes pw-garantia {
+  to {
+    transform: none;
+  }
+}
+
+/* entrada do topo da página */
+.mo .hero .lead,
+.mo .hero .cbtns,
+.mo .hero .proof,
+.mo .shero .lead,
+.mo .shero .cbtns {
+  animation: mo-sobe 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.mo .hero .lead,
+.mo .shero .lead {
+  animation-delay: 0.35s;
+}
+.mo .hero .cbtns,
+.mo .shero .cbtns {
+  animation-delay: 0.5s;
+}
+.mo .hero .proof {
+  animation-delay: 0.65s;
+}
+@keyframes mo-sobe {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+
+/* ---------- roda do topo inclina seguindo o mouse ---------- */
+.mo .wheelbox {
+  transform: perspective(1000px) rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg));
+  transform-style: preserve-3d;
+}
+.mo .wheelbox::before {
+  translate: var(--gx, 0px) var(--gy, 0px);
+}
+
+/* ---------- faixa amarela reage à velocidade da rolagem ---------- */
+.mo .ticker {
+  transform: rotate(-1.2deg) skewX(var(--sk, 0deg));
+}
+
+/* ---------- botões: atração magnética e brilho ---------- */
+.mo .btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.15s,
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    translate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mo .btn.ima {
+  transition:
+    transform 0.15s,
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    translate 0.12s linear;
+}
+.mo .btn:not(.ghost)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 48%,
+    transparent 66%
+  );
+  transform: translateX(-110%);
+  transition: transform 0s;
+}
+.mo .btn:not(.ghost):hover::after {
+  transform: translateX(110%);
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ---------- serviços: luz que segue o cursor e ícones que se desenham ---------- */
+.mo .svc a,
+.mo .svc article {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.mo .svc a::before,
+.mo .svc article::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(245, 184, 0, 0.13),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.mo .svc a:hover::before,
+.mo .svc article:hover::before {
+  opacity: 1;
+}
+.mo .svc svg * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.3s cubic-bezier(0.6, 0.1, 0.2, 1) 0.25s;
+}
+.mo .svc .in svg *,
+.mo .svc .desenhado svg * {
+  stroke-dashoffset: 0;
+}
+.mo .svc a:hover svg {
+  transform: rotate(-8deg) scale(1.06);
+}
+.mo .svc svg {
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ---------- passos: a linha amarela se preenche ---------- */
+.mo .steps li {
+  position: relative;
+  border-top-color: var(--line);
+}
+.mo .steps li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  height: 4px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 1s cubic-bezier(0.6, 0.1, 0.2, 1);
+  transition-delay: calc(var(--d, 0ms) + 0.15s);
+}
+.mo .steps li.in::after {
+  transform: none;
+}
+
+/* ---------- fotos ganham profundidade na rolagem ---------- */
+.mo [data-par] {
+  translate: 0 var(--py, 0px);
+}
+
+/* ========== seção "Do riscado ao espelhado" (scrollytelling) ========== */
+.sx {
+  padding-block: 84px 0;
+}
+.sx-palco {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.sx-roda {
+  position: relative;
+  width: min(100%, 520px);
+  aspect-ratio: 1;
+  justify-self: center;
+  isolation: isolate;
+}
+.sx-roda::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(245, 184, 0, var(--brilho, 0.16)),
+    transparent 72%
+  );
+}
+.sx-giro,
+.sx-camada,
+.sx-camada img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sx-camada img {
+  display: block;
+  rotate: var(--giro, 0deg);
+}
+/* só uma camada projeta sombra: as de cima ficam leves para girar */
+.sx-diamante img,
+.mo .sx-on .sx-pintada img {
+  filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.55));
+}
+.mo .sx-on .sx-diamante img {
+  filter: none;
+}
+/* sem animação, só a roda pronta aparece.
+   As três fotos (antes, pintada, depois) estão alinhadas pixel a pixel. */
+.sx-gasta,
+.sx-pintada,
+.sx-ferramenta,
+.sx-hud {
+  display: none;
+}
+.sx-passos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 22px;
+  counter-reset: sx;
+}
+.sx-passos li {
+  counter-increment: sx;
+  display: grid;
+  gap: 6px;
+  padding-left: 58px;
+  position: relative;
+}
+.sx-passos li::before {
+  content: "0" counter(sx);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font: italic 900 2rem/1 var(--display);
+  color: var(--amber);
+}
+.sx-passos h3 {
+  font-size: 1.6rem;
+}
+.sx-passos p {
+  color: var(--mute);
+  max-width: 44ch;
+}
+.sx-cta {
+  margin-top: 30px;
+}
+
+/* com motion: a seção fica alta e o palco gruda na tela enquanto se rola */
+.mo .sx.sx-on {
+  height: 360vh;
+  height: 360svh;
+  padding-top: 84px;
+}
+.mo .sx-on .sx-fixo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: 22px;
+  padding-block: 92px 24px;
+}
+.mo .sx-on .sx-gasta,
+.mo .sx-on .sx-pintada,
+.mo .sx-on .sx-ferramenta {
+  display: block;
+}
+.mo .sx-on .sx-hud {
+  display: flex;
+}
+/* tinta: a camada gasta é varrida de cima para baixo */
+.mo .sx-on .sx-gasta {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent calc(var(--tinta, 0) * 120% - 20%),
+    #000 calc(var(--tinta, 0) * 120%)
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent calc(var(--tinta, 0) * 120% - 20%),
+    #000 calc(var(--tinta, 0) * 120%)
+  );
+}
+/* diamantação: o brilho aparece de fora para dentro, como o corte do torno */
+.mo .sx-on .sx-diamante {
+  -webkit-mask-image: radial-gradient(
+    circle closest-side,
+    transparent calc(var(--corte, 100%) - 0.6%),
+    #000 var(--corte, 100%)
+  );
+  mask-image: radial-gradient(
+    circle closest-side,
+    transparent calc(var(--corte, 100%) - 0.6%),
+    #000 var(--corte, 100%)
+  );
+}
+.sx-ferramenta {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--ferr, 0);
+}
+.sx-ferramenta::before {
+  /* linha do corte */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--corte, 100%) * 1);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 214, 90, 0.85);
+  box-shadow:
+    0 0 18px rgba(245, 184, 0, 0.7),
+    inset 0 0 18px rgba(245, 184, 0, 0.45);
+}
+.sx-ferramenta::after {
+  /* ponta da ferramenta */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(50% + var(--corte, 100%) / 2);
+  width: 14px;
+  height: 14px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: #fff6cf;
+  box-shadow:
+    0 0 10px 3px #ffd34d,
+    0 0 34px 10px rgba(245, 184, 0, 0.6);
+}
+.sx-hud {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: -12%;
+  translate: -50% 0;
+  align-items: center;
+  gap: 10px;
+  font: 600 0.85rem var(--body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  white-space: nowrap;
+}
+.sx-hud i {
+  display: block;
+  width: 90px;
+  height: 4px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.sx-hud i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--amber);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--prog, 0));
+}
+
+.mo .sx-on .sx-passos {
+  display: grid;
+  gap: 0;
+}
+.mo .sx-on .sx-passos li {
+  grid-area: 1 / 1;
+  opacity: 0;
+  translate: 0 18px;
+  transition:
+    opacity 0.45s,
+    translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+.mo .sx-on .sx-passos li.ativo {
+  opacity: 1;
+  translate: 0 0;
+  pointer-events: auto;
+}
+.sx-pontos {
+  display: none;
+}
+.mo .sx-on .sx-pontos {
+  display: flex;
+  gap: 8px;
+  margin-top: 26px;
+}
+.sx-pontos span {
+  width: 28px;
+  height: 4px;
+  background: var(--line);
+  transition: background 0.3s;
+}
+.sx-pontos span.ativo {
+  background: var(--amber);
+}
+
+@media (max-width: 860px) {
+  .sx-palco {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .sx-roda {
+    width: min(78vw, 360px);
+    order: -1;
+  }
+  .mo .sx-on .sx-fixo {
+    padding-top: 62px;
+    gap: 14px;
+  }
+  .mo .sx-on .sx-roda {
+    width: min(70vw, 42svh, 340px);
+  }
+  .mo .sx-on .sx-palco {
+    gap: 34px;
+  }
+  .mo .sx.sx-on {
+    height: 270svh;
+  }
+  .mo .sx-on .head {
+    margin-bottom: 0;
+  }
+  .mo .sx-on .head p {
+    display: none;
+  }
+  /* a barra fixa de orçamento cobre o fim do palco; ela já leva ao orçamento */
+  .mo .sx-on .sx-cta {
+    display: none;
+  }
+  /* no celular os tracinhos já mostram o progresso */
+  .mo .sx-on .sx-hud {
+    display: none;
+  }
+}

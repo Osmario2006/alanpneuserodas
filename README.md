@@ -29,6 +29,7 @@ alan-wheeling-site/
 ├─ js/dados.js                 CONTATOS, GALERIA DE TRABALHOS e VÍDEOS  ← comece por aqui
 ├─ js/comum.js                 partes de todas as páginas: menu, cabeçalho, botão do WhatsApp,
 │                              formulário de orçamento, fotos ampliadas e animações
+├─ js/motion.js        animações ligadas à rolagem (estilos em css/motion.css)
 ├─ js/main.js                  página inicial: galeria e roda do topo
 ├─ js/desempeno.js             animação do aro empenado
 ├─ js/simulador.js             simulador de rodas
@@ -54,6 +55,37 @@ alan-wheeling-site/
 - **Publicar com outro endereço:** o endereço provisório é `https://osmario2006.github.io/alanpneuserodas/`. Quando houver domínio próprio, troque esse texto em todos os arquivos `.html`, no `sitemap.xml` e no `robots.txt` (no VS Code: Ctrl+Shift+H). No `404.html`, ajuste também a linha `<base href="/alanpneuserodas/">` para `<base href="/">`.
 - **Cabeçalho, rodapé, orçamento e contato** se repetem nas páginas. Ao mudar um link ou texto deles, mude em todos os `.html`.
 - **Mudar cores:** as cores ficam no começo de `css/style.css`, no bloco `:root` (`--amber` é o amarelo da marca).
+
+## Motion (animações)
+
+Ficam em dois arquivos próprios, carregados em todas as páginas:
+
+- `css/motion.css`: estilos das animações.
+- `js/motion.js`: comportamento ligado à rolagem e ao mouse.
+
+O que tem:
+
+- **Seção "Do riscado ao espelhado"** (página inicial): a roda gira conforme a página rola e passa pelas quatro etapas: gasta, desempeno (para de balançar), pintura eletrostática (a tinta varre a roda) e diamantação CNC (o brilho aparece de fora para dentro, como o corte do torno). As imagens são três fotos da mesma roda, recortadas e alinhadas: `assets/img/roda-antes.webp` (gasta), `roda-pintada.webp` (pintada de preto, montada a partir da foto final) e `roda-depois.webp` (diamantada). Para trocar por uma roda da loja, use fotos de frente com a roda centralizada e do mesmo tamanho nas três. Os trechos da rolagem de cada etapa estão na lista `ETAPAS` em `js/motion.js`.
+- Títulos que sobem palavra por palavra, números que contam até o valor, barra de progresso no topo.
+- Cabeçalho que some ao descer e volta ao subir.
+- Faixa amarela que acelera, inclina e inverte o sentido com a rolagem.
+- Roda do topo que inclina seguindo o mouse; botões com atração magnética e brilho; cartões de serviço com luz seguindo o cursor e ícones que se desenham.
+- Troca suave entre páginas (Chrome, Edge e Safari recentes).
+
+Se o visitante ativou "reduzir movimento" no sistema, nada disso roda e a seção mostra as quatro etapas paradas, com a roda pronta. Sem JavaScript, o site também aparece completo.
+
+## Celular
+
+A maioria das visitas vem do Instagram, pelo celular. Os ajustes ficam no fim de `css/style.css` (bloco "celular") e em `js/comum.js` (barra de ações):
+
+- Barra fixa no rodapé com **Pedir orçamento** e **WhatsApp**. Aparece depois do topo da página e some quando o formulário ou o contato já estão na tela.
+- Nenhuma página rola para o lado (o mapa empurrava a tela para 735 px).
+- Botões e links com área de toque de pelo menos 44 px; efeitos de passar o mouse desligados no toque.
+- Topo mais compacto: botões lado a lado, números numa linha e a roda já aparece na primeira tela.
+- Galerias das páginas de serviço em duas colunas; vídeo centralizado.
+- Seção "Do riscado ao espelhado" mais curta no celular.
+
+Para testar: no navegador do computador, aperte F12 e ative o modo celular (ícone de celular e tablet), ou abra pelo celular na mesma rede usando o endereço que o Live Server mostra.
 
 ## Origem do material
 

@@ -29,6 +29,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/motion.css" />
     <link rel="preload" as="image" href="assets/img/roda-hero.webp" fetchpriority="high" />
     <script type="application/ld+json">
     {
@@ -190,6 +191,48 @@
           </p>
         </div>
         <div class="strip" id="strip"></div>
+      </section>
+
+      <section id="transformacao" class="sx" aria-labelledby="sx-t">
+        <div class="sx-fixo">
+          <div class="head">
+            <h2 id="sx-t">Do riscado ao espelhado</h2>
+            <p>Role a página e acompanhe a reforma de uma roda, etapa por etapa.</p>
+          </div>
+          <div class="sx-palco">
+            <div>
+              <ol class="sx-passos">
+                <li>
+                  <h3>Chega assim</h3>
+                  <p>Riscada na guia, com a pintura gasta e o volante vibrando depois de um buraco.</p>
+                </li>
+                <li>
+                  <h3>Desempeno</h3>
+                  <p>A roda gira na máquina, o empeno é medido e corrigido até ela rodar sem balanço.</p>
+                </li>
+                <li>
+                  <h3>Pintura eletrostática</h3>
+                  <p>Tinta em pó aplicada por carga elétrica e curada no forno: cor uniforme e resistente.</p>
+                </li>
+                <li>
+                  <h3>Diamantação CNC</h3>
+                  <p>O torno usina a face e devolve o brilho espelhado de roda nova de fábrica.</p>
+                </li>
+              </ol>
+              <div class="sx-pontos" aria-hidden="true"></div>
+              <a class="btn sx-cta" href="#orcamento">Quero a minha assim</a>
+            </div>
+            <div class="sx-roda" aria-hidden="true">
+              <div class="sx-giro">
+                <div class="sx-camada sx-pintada"><img src="assets/img/roda-pintada.webp" alt="" width="1040" height="1040" loading="lazy" /></div>
+                <div class="sx-camada sx-gasta"><img src="assets/img/roda-antes.webp" alt="" width="1040" height="1040" loading="lazy" /></div>
+                <div class="sx-camada sx-diamante"><img src="assets/img/roda-depois.webp" alt="" width="1040" height="1040" loading="lazy" /></div>
+                <div class="sx-ferramenta"></div>
+              </div>
+              <div class="sx-hud"><span>Reforma</span><i></i></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="servicos">
@@ -472,5 +515,6 @@
     <script src="js/dados.js"></script>
     <script src="js/comum.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/motion.js"></script>
   </body>
 </html>

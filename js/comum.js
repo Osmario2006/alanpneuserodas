@@ -78,6 +78,38 @@ document.addEventListener("keydown", (e) => {
   document.querySelectorAll("#orcamento, #contato").forEach((el) => io.observe(el));
 }
 
+/* barra de ações no celular: aparece depois do topo da página e some quando o
+   formulário ou o contato estão na tela (no computador fica escondida pelo CSS) */
+{
+  const temOrc = !!document.getElementById("orcamento");
+  const barra = document.createElement("nav");
+  barra.className = "barra-cel fora";
+  barra.setAttribute("aria-label", "Ações rápidas");
+  barra.innerHTML = `<a class="b-orc" href="${temOrc ? "#orcamento" : "index.html#orcamento"}">Pedir orçamento</a><a class="b-wa" target="_blank" rel="noopener" href="${wa(document.body.dataset.wa || "Olá! Vim pelo site e queria um orçamento.")}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5z"/><path d="M8.5 9.2c.3 2.6 2.7 5 5.3 5.3l1.3-1.3 2 1-.4 1.6c-4.3.6-9.1-4.2-8.5-8.5l1.6-.4 1 2z" fill="currentColor" stroke-width="1"/></svg>WhatsApp</a>`;
+  document.body.appendChild(barra);
+  const perto = new Set();
+  let passou = false;
+  const atualizar = () => {
+    const mostrar = passou && perto.size === 0;
+    barra.classList.toggle("fora", !mostrar);
+    barra.inert = !mostrar;
+  };
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => (e.isIntersecting ? perto.add(e.target) : perto.delete(e.target)));
+    atualizar();
+  });
+  document.querySelectorAll("#orcamento, #contato").forEach((el) => io.observe(el));
+  const rolou = () => {
+    const p = scrollY > innerHeight * 0.6;
+    if (p !== passou) {
+      passou = p;
+      atualizar();
+    }
+  };
+  addEventListener("scroll", rolou, { passive: true });
+  rolou();
+}
+
 /* formulário de orçamento: monta a mensagem e abre o WhatsApp */
 {
   const f = $("#form-orc");
