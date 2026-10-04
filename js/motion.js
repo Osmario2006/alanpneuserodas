@@ -160,13 +160,13 @@
     sxPontos = [],
     sxRoda = null,
     sxGasta = null,
-    sxDiamante = null,
+    sxPintada = null,
     sxAtivo = -1;
   if (sx) {
     sx.classList.add("sx-on");
     sxRoda = sx.querySelector(".sx-roda");
     sxGasta = sx.querySelector(".sx-gasta");
-    sxDiamante = sx.querySelector(".sx-diamante");
+    sxPintada = sx.querySelector(".sx-pintada");
     sxPassos = todos(".sx-passos li", sx);
     const pontos = sx.querySelector(".sx-pontos");
     sxPassos.forEach(() => pontos.append(document.createElement("span")));
@@ -175,13 +175,16 @@
   /* trechos da rolagem (0 a 1) em que cada etapa acontece */
   const ETAPAS = [0, 0.22, 0.46, 0.66];
 
-  /* As máscaras vão direto no style de cada camada. Com variável CSS dentro do
-     gradiente, o Safari (iPhone) não redesenha a máscara durante a rolagem e a
-     roda terminava preta, só com a camada pintada aparecendo. */
-  function mascara(el, valor) {
-    if (el.dataset.mask === valor) return;
-    el.dataset.mask = valor;
-    el.style.webkitMaskImage = el.style.maskImage = valor;
+  /* Camadas, de baixo para cima: diamantada, pintada, gasta. As de cima são
+     recortadas com clip-path e escondidas quando a etapa delas acaba, então o
+     fim mostra só a diamantada. (Máscaras com gradiente não eram redesenhadas
+     pelo Safari do iPhone durante a rolagem e a roda terminava preta.) */
+  function camada(el, recorte, some) {
+    const v = some ? "hidden" : "visible";
+    if (el.style.visibility !== v) el.style.visibility = v;
+    if (el.dataset.clip === recorte) return;
+    el.dataset.clip = recorte;
+    el.style.webkitClipPath = el.style.clipPath = recorte;
   }
 
   function cenaSx(vh) {
@@ -190,26 +193,15 @@
     const st = sxRoda.style;
     /* giro contínuo */
     st.setProperty("--giro", `${(p * 720).toFixed(2)}deg`);
-    /* pintura: a camada gasta é varrida de cima para baixo */
+    /* pintura: a camada gasta é cortada de cima para baixo e mostra a pintada */
     const t = suave(faixa(p, 0.48, 0.62));
-    sxGasta.style.visibility = t >= 1 ? "hidden" : "";
-    mascara(
-      sxGasta,
-      t <= 0
-        ? "none"
-        : `linear-gradient(to bottom, transparent ${(t * 120 - 20).toFixed(2)}%, #000 ${(t * 120).toFixed(2)}%)`,
-    );
-    /* diamantação: o brilho aparece de fora para dentro, como o corte do torno */
+    camada(sxGasta, t <= 0 ? "none" : `inset(${(t * 100).toFixed(2)}% 0 0 0)`, t >= 1);
+    /* diamantação: a pintada encolhe num círculo e o brilho aparece de fora
+       para dentro, como o corte do torno (circle 50% = borda da roda) */
     const c = faixa(p, 0.68, 0.92);
     const corte = (1 - c) * 100;
     st.setProperty("--corte", `${corte.toFixed(2)}%`); // anel da ferramenta
-    sxDiamante.style.visibility = c <= 0 ? "hidden" : "";
-    mascara(
-      sxDiamante,
-      c >= 1
-        ? "none"
-        : `radial-gradient(circle closest-side, transparent ${(corte - 0.6).toFixed(2)}%, #000 ${corte.toFixed(2)}%)`,
-    );
+    camada(sxPintada, c <= 0 ? "none" : `circle(${(corte / 2).toFixed(2)}% at 50% 50%)`, c >= 1);
     st.setProperty("--ferr", c > 0 && c < 1 ? "1" : "0");
     st.setProperty("--brilho", (0.1 + 0.22 * c).toFixed(3));
     st.setProperty("--prog", p.toFixed(3));

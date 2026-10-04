@@ -273,13 +273,9 @@
   display: block;
   rotate: var(--giro, 0deg);
 }
-/* só uma camada projeta sombra: as de cima ficam leves para girar */
-.sx-diamante img,
-.mo .sx-on .sx-pintada img {
+/* só a camada de baixo (diamantada) projeta sombra: as de cima ficam leves para girar */
+.sx-diamante img {
   filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.55));
-}
-.mo .sx-on .sx-diamante img {
-  filter: none;
 }
 /* sem animação, só a roda pronta aparece.
    As três fotos (antes, pintada, depois) estão alinhadas pixel a pixel. */
@@ -347,8 +343,8 @@
 .mo .sx-on .sx-hud {
   display: flex;
 }
-/* as máscaras da tinta (camada gasta) e do corte (camada diamantada) são
-   aplicadas pelo js/motion.js direto em cada camada, a cada quadro */
+/* a tinta (recorte da camada gasta) e o corte do torno (recorte circular da
+   camada pintada) são aplicados pelo js/motion.js direto em cada camada */
 .sx-ferramenta {
   position: absolute;
   inset: 0;
