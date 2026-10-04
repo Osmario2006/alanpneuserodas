@@ -347,32 +347,8 @@
 .mo .sx-on .sx-hud {
   display: flex;
 }
-/* tinta: a camada gasta é varrida de cima para baixo */
-.mo .sx-on .sx-gasta {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent calc(var(--tinta, 0) * 120% - 20%),
-    #000 calc(var(--tinta, 0) * 120%)
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent calc(var(--tinta, 0) * 120% - 20%),
-    #000 calc(var(--tinta, 0) * 120%)
-  );
-}
-/* diamantação: o brilho aparece de fora para dentro, como o corte do torno */
-.mo .sx-on .sx-diamante {
-  -webkit-mask-image: radial-gradient(
-    circle closest-side,
-    transparent calc(var(--corte, 100%) - 0.6%),
-    #000 var(--corte, 100%)
-  );
-  mask-image: radial-gradient(
-    circle closest-side,
-    transparent calc(var(--corte, 100%) - 0.6%),
-    #000 var(--corte, 100%)
-  );
-}
+/* as máscaras da tinta (camada gasta) e do corte (camada diamantada) são
+   aplicadas pelo js/motion.js direto em cada camada, a cada quadro */
 .sx-ferramenta {
   position: absolute;
   inset: 0;
