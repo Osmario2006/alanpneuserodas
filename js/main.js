@@ -190,8 +190,10 @@ PROCESSO.forEach((p) => {
   $("#strip").appendChild(a);
 });
 
-/* roda do hero: depois de entrar, sobe de leve com a rolagem */
+/* roda do hero: depois de entrar, sobe de leve com a rolagem
+   (no celular fica parada: subindo, ela encostava nos números de cima) */
 const hero = $("#hero-roda");
+const celular = matchMedia("(max-width: 560px)");
 if (!reduce) {
   hero.addEventListener(
     "animationend",
@@ -199,7 +201,8 @@ if (!reduce) {
       hero.style.animation = "none";
       let tick = false;
       const move = () => {
-        hero.style.transform = `translateY(${Math.min(scrollY, 700) * -0.06}px) rotate(${Math.min(scrollY, 700) * 0.004}deg)`;
+        const y = celular.matches ? 0 : Math.min(scrollY, 700);
+        hero.style.transform = y ? `translateY(${y * -0.06}px) rotate(${y * 0.004}deg)` : "";
         tick = false;
       };
       addEventListener(
