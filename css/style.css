@@ -1,15 +1,31 @@
 /* Layout: preto de oficina e amarelo da fachada. Hero com a roda renderizada, depois prova real: trabalhos do Instagram em grade, vídeos do processo e a história da loja. */
 :root {
-  --ink: #0e0e0b;
-  --panel: #17170f;
-  --line: #2e2d21;
-  --paper: #f4f1e3;
-  --mute: #aaa794;
-  --amber: #f5b800;
-  --amberink: #171300;
+  /* cores: ver GUIA-DE-ESTILO.md */
+  --ink: #0b0b0b; /* asfalto: fundo */
+  --panel: #151515; /* grafite: cartões */
+  --panel-2: #1c1c1c; /* grafite claro: cartão ativo, campos */
+  --line: #262626; /* linha fina */
+  --line-2: #3a3a3a; /* linha forte */
+  --paper: #f2f2f2; /* giz: texto */
+  --mute: #a6a6a6; /* névoa: texto de apoio */
+  --amber: #f5b800; /* amarelo da fachada */
+  --amberink: #151515;
   --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
   --body: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color-scheme: dark;
+  /* espaçamento (base 8 px) */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 48px;
+  --s6: 80px;
+  --secao: 96px;
+  /* formas */
+  --r-card: 20px;
+  --r-mini: 14px;
+  --r-campo: 12px;
+  --curva: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 * {
   box-sizing: border-box;
@@ -1471,6 +1487,196 @@ dialog.lb::backdrop {
   }
 }
 
+/* ===== Guia de estilo (GUIA-DE-ESTILO.md) =====
+   Galeria escura inspirada em sites de carro premium (Rivian e Tesla, via
+   Refero Styles): fundo asfalto, cartões grafite com borda fina de 1 px,
+   cantos arredondados, um único botão amarelo por tela e títulos grandes
+   com as letras um pouco mais juntas. */
+.wrap {
+  max-width: 1240px;
+}
+h1 {
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+h2 {
+  font-size: clamp(2.25rem, 5.4vw, 4rem);
+  letter-spacing: -0.015em;
+}
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.05;
+}
+section {
+  padding-top: var(--secao);
+}
+.head {
+  gap: var(--s2);
+  margin-bottom: 40px;
+}
+.head p,
+.hero p.lead,
+.shero p.lead {
+  color: var(--mute);
+}
+
+/* botões: pílula; o amarelo é só do principal */
+.btn {
+  min-height: 48px;
+  padding: 12px 26px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+.btn.ghost {
+  border: 1px solid var(--line-2);
+}
+.btn.ghost:hover {
+  border-color: var(--paper);
+  color: var(--paper);
+}
+.chip,
+.seg button {
+  border-width: 1px;
+  border-color: var(--line-2);
+}
+
+/* cabeçalho */
+.top.rolou {
+  border-bottom-color: var(--line);
+}
+.menu-btn {
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+}
+.menu {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+/* cartões: grafite, borda fina, cantos de 20 px, sem sombra */
+.svc,
+.checks {
+  gap: var(--s2);
+  background: none;
+  border: 0;
+}
+.svc article,
+.svc a,
+.checks li {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  transition:
+    background 0.25s var(--curva),
+    border-color 0.25s var(--curva),
+    transform 0.4s var(--curva);
+}
+.svc article,
+.svc a {
+  padding: var(--s4);
+}
+.svc article:hover,
+.svc a:hover {
+  background: var(--panel-2);
+  border-color: var(--line-2);
+}
+.svc h3 {
+  color: var(--paper);
+}
+.svc svg {
+  stroke: var(--amber);
+}
+.svc a:hover .more {
+  color: var(--amber);
+}
+.fixbox,
+.sim,
+.form,
+.faq details,
+.lb figure {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+}
+.faq details[open] {
+  border-color: var(--line-2);
+}
+.sim .spec,
+.ctl {
+  border-top: 1px solid var(--line);
+}
+.form {
+  padding: var(--s4);
+}
+.form input,
+.form select,
+.form textarea {
+  background: var(--ink);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-campo);
+  min-height: 48px;
+}
+.lb figure {
+  overflow: hidden;
+}
+
+/* fotos e vídeo com cantos arredondados */
+.grid button,
+.gal a,
+.vid,
+.mapa,
+.story .pics img {
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+.strip a {
+  border-radius: var(--r-mini);
+}
+.story .pics img,
+.vid,
+.mapa {
+  border: 1px solid var(--line);
+}
+.vid::after {
+  border-radius: 999px;
+  inset: auto 16px 16px auto;
+  width: 34%;
+  height: 4px;
+}
+
+/* faixas amarelas: momento da marca */
+.igband,
+.cta {
+  border-radius: 28px;
+  padding: var(--s5) clamp(24px, 5vw, 56px);
+}
+
+/* números e passos */
+.proof b {
+  color: var(--paper);
+}
+.steps li {
+  border-top-width: 2px;
+}
+
+/* rodapé */
+.rodape {
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+}
+.rod-base {
+  border-top-color: var(--line);
+}
+
+@media (max-width: 860px) {
+  section {
+    padding-top: 72px;
+  }
+}
+
+
 /* ===== celular =====
    A maior parte das visitas vem do Instagram, no celular. Aqui ficam os ajustes
    para telas pequenas e para toque: nada de rolagem para o lado, áreas de toque
@@ -1543,7 +1749,7 @@ select {
 
 @media (max-width: 560px) {
   section {
-    padding-top: 56px;
+    padding-top: 64px;
   }
   .head {
     margin-bottom: 26px;
@@ -1757,8 +1963,6 @@ html {
   .grid,
   .strip,
   .gal,
-  .svc,
-  .checks,
   .sim,
   .fixbox,
   .form,
@@ -1780,6 +1984,9 @@ html {
   .igband,
   .cta {
     padding-inline: 16px;
+  }
+  .svc {
+    gap: var(--s1);
   }
   /* cards de serviço viram uma lista compacta: ícone, texto e seta na mesma linha */
   .svc a,

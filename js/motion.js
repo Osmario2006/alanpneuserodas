@@ -60,6 +60,33 @@
     vistos.observe(h);
   });
 
+  /* ---------- brilho metálico passando pelo título do topo (ideia do Shimmer Text, Spell UI) ----------
+     Cada palavra recebe o mesmo degradê, deslocado pela sua posição no título,
+     para o brilho atravessar o título inteiro como uma faixa só. */
+  const tituloTopo = document.querySelector(".hero h1");
+  if (tituloTopo && CSS.supports("(background-clip: text) or (-webkit-background-clip: text)")) {
+    const medir = () => {
+      const b = tituloTopo.getBoundingClientRect();
+      tituloTopo.style.setProperty("--hw", `${b.width}px`);
+      tituloTopo.style.setProperty("--hh", `${b.height}px`);
+      todos(".pw > span", tituloTopo).forEach((s) => {
+        /* posição sem a animação de entrada (que move as palavras para baixo) */
+        const w = s.parentElement.getBoundingClientRect();
+        s.style.setProperty("--ox", `${(b.left - w.left).toFixed(1)}px`);
+        s.style.setProperty("--oy", `${(b.top - w.top).toFixed(1)}px`);
+      });
+    };
+    medir();
+    tituloTopo.classList.add("brilho");
+    addEventListener("resize", medir);
+    if (document.fonts) document.fonts.ready.then(medir);
+  }
+
+  todos("main .head h2, .igband h2, .sx h2").forEach((h) => {
+    quebrar(h);
+    vistos.observe(h);
+  });
+
   /* ---------- números que contam até o valor ---------- */
   function contar(el) {
     const m = el.textContent.match(/^(\D*)(\d+)(\D*)$/);
@@ -121,6 +148,33 @@
     });
   }
 
+  /* ---------- cartões e fotos inclinam em 3D seguindo o mouse (ideia do Tilt Card, Spell UI) ----------
+     Usa a propriedade "rotate" (e não "transform"), para não brigar com a animação de entrada. */
+  if (fino) {
+    todos(".svc > a, .svc > article, .gal a").forEach((c) => {
+      let quadroT = 0;
+      c.classList.add("inclina");
+      c.addEventListener("pointermove", (e) => {
+        cancelAnimationFrame(quadroT);
+        quadroT = requestAnimationFrame(() => {
+          const r = c.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          const ang = Math.min(Math.hypot(x, y) * 2, 1) * 7;
+          c.style.rotate = `${(-y).toFixed(3)} ${x.toFixed(3)} 0 ${ang.toFixed(2)}deg`;
+          c.style.setProperty("--gx", `${((x + 0.5) * 100).toFixed(1)}%`);
+          c.style.setProperty("--gy", `${((y + 0.5) * 100).toFixed(1)}%`);
+        });
+      });
+      c.addEventListener("pointerenter", () => c.classList.add("inclinando"));
+      c.addEventListener("pointerleave", () => {
+        cancelAnimationFrame(quadroT);
+        c.classList.remove("inclinando");
+        c.style.rotate = "";
+      });
+    });
+  }
+
   /* ---------- fotos com profundidade ---------- */
   const fotos = todos(".story .pics img");
   if (fotos[0]) fotos[0].dataset.par = "-0.06";
@@ -175,6 +229,11 @@
   if (sx) {
     sx.classList.add("sx-on");
     sxRoda = sx.querySelector(".sx-roda");
+    /* raios de luz atrás da roda quando a diamantação termina (ideia do Light Rays, Spell UI) */
+    const raios = document.createElement("div");
+    raios.className = "sx-raios";
+    raios.setAttribute("aria-hidden", "true");
+    sxRoda.prepend(raios);
     sxGasta = sx.querySelector(".sx-gasta");
     sxPintada = sx.querySelector(".sx-pintada");
     sxPassos = todos(".sx-passos li", sx);
@@ -215,6 +274,7 @@
     st.setProperty("--ferr", c > 0 && c < 1 ? "1" : "0");
     st.setProperty("--brilho", (0.1 + 0.22 * c).toFixed(3));
     st.setProperty("--prog", p.toFixed(3));
+    st.setProperty("--raios", suave(faixa(p, 0.88, 0.97)).toFixed(3));
     let a = 0;
     ETAPAS.forEach((ini, i) => p >= ini && (a = i));
     if (a !== sxAtivo) {

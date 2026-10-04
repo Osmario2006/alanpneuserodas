@@ -87,6 +87,10 @@ A maioria das visitas vem do Instagram, pelo celular. Os ajustes ficam no fim de
 
 Para testar: no navegador do computador, aperte F12 e ative o modo celular (ícone de celular e tablet), ou abra pelo celular na mesma rede usando o endereço que o Live Server mostra.
 
+## Guia de estilo
+
+As cores, fontes, espaçamentos e formas do site estão descritos em `GUIA-DE-ESTILO.md`, inspirado em sites de carro premium do Refero Styles (Rivian e Tesla). Os valores ficam no `:root` e na seção "Guia de estilo" de `css/style.css`. Os efeitos de brilho no título, inclinação 3D dos cartões e raios de luz na roda (ideias do Spell UI) ficam no fim de `css/motion.css` e em `js/motion.js`.
+
 ## Origem do material
 
 - Fotos e vídeos: Instagram @alanpneuserodas (os links de cada post estão em `js/dados.js`).
